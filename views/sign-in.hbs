@@ -1,0 +1,19 @@
+{{> header }}
+<div class="login-content">
+<div id="login">
+         <img src="/img/yachtthot-white.png" style="width:300px"/>
+            <h1>Party Boats Near Me</h1>
+            <div id="onboarding-about">Set sail for an unforgettable adventure with Yacht Thot, your premier destination for matching boat owners with yacht thots.</div>
+            <div id="g_id_onload"
+                data-client_id="{{google_client_id}}"
+                data-ux_mode="redirect"
+                data-login_uri="{{google_redirect_url}}"
+                >
+            </div>
+            <div class="g_id_signin"
+            data-type="standard"
+            data-width=300></div> 
+            <div id="tos-agree">I agree to the <a href='/terms-of-service'>Terms of Service</a>.</div>
+</div>
+</div>
+{{> footer }}

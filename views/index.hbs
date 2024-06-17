@@ -1,0 +1,39 @@
+{{> header }}
+<div id="onboarding">
+    <div id="onboarding-right">
+        <div class="centered">
+            <div id="step1-1">
+                <h2>Which One Are You?</h2>
+                <div id="onboard-captain" class="onboarding-button"><i class="fa-solid fa-anchor"></i> Boat Owner </div>
+                <div id="onboard-thot" class="onboarding-button">Yacht Thot <i class="fa-solid fa-person-dress"></i></div>
+            </div>
+            <div id="step2-1">
+                <h2>Enter a Username</h2>
+                <h2>Enter a Tagline</h2>
+            </div>
+        </div>
+    </div>
+    <div id="onboarding-left">
+    <div class="centered">
+        <div id="step1-2">
+            <h1>Party Boats Near Me</h1>
+            <div id="onboarding-about">Set sail for an unforgettable adventure with Yacht Thot, your premier destination for matching boat owners with yacht thots.</div>
+            <div id="g_id_onload"
+                data-client_id="{{google_client_id}}"
+                data-ux_mode="redirect"
+                data-login_uri="{{google_redirect_url}}"
+                >
+            </div>
+            <div class="g_id_signin"
+            data-type="standard"
+            data-width=300></div> 
+            <div id="tos-agree">By logging in with Google,<br>I agree to the <a href='/terms-of-service'>Terms of Service</a>.</div>
+        </div>
+        <div id="step2-2">
+            <h2>Enter a Bio</h2>
+        </div>
+    </div>
+</div>
+
+</div>
+{{> footer }}
