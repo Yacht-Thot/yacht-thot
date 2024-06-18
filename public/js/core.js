@@ -95,7 +95,7 @@ function showStep(step) {
 **/
 
 function populateEvents() {
-    document.getElementById("no-profile-events").style.display = "none";
+   // document.getElementById("no-profile-events").style.display = "none";
 }
 
 populateEvents();
