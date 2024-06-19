@@ -62,17 +62,8 @@ app.get('/support', (req, res) => {
     )
 });
 
-app.get('/event', (req, res) => {
-    res.render('event',
-        {
-           title: "Username's Event near Miami, FL",
-           description: ""
-        }
-    )
-});
-
-app.get('/user', (req, res) => {
-    res.render('user',
+app.get('/captain', (req, res) => {
+    res.render('captain',
         {
            title: "Yacht Thot - Username",
            description: ""
@@ -80,8 +71,26 @@ app.get('/user', (req, res) => {
     )
 });
 
-app.get('/feed', (req, res) => {
-    res.render('feed',
+app.get('/thot', (req, res) => {
+    res.render('thot',
+        {
+           title: "Yacht Thot - Username",
+           description: ""
+        }
+    )
+});
+
+app.get('/captain-feed', (req, res) => {
+    res.render('captain-feed',
+        {
+           title: "Yacht Thot - Home",
+           description: ""
+        }
+    )
+});
+
+app.get('/thot-feed', (req, res) => {
+    res.render('thot-feed',
         {
            title: "Yacht Thot - Home",
            description: ""

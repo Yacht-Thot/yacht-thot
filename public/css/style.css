@@ -39,6 +39,7 @@ body {
 }
 #header img {
     height: 100%;
+    float: left;
 }
 #main-content {
     width: 100vw;
