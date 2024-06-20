@@ -41,6 +41,19 @@ body {
     height: 100%;
     float: left;
 }
+#thot-profile-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#thot-profile-img-holder {
+    background: url(/img/sample/thot.jpg);
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-size: cover;
+}
 #main-content {
     width: 100vw;
     height: 100vh;
