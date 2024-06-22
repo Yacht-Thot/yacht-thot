@@ -1,5 +1,89 @@
 {{> header }}
+<style>
+    #main-content {
+        display: none;
+    }
+    #thot-profile-holder {
+        font-family: sans-serif;
+    }
+    #thot-username {
+        font-size: 3em;
+        display: inline-block;
+    }
+    #thot-age {
+        font-size: 2.5em;
+        display: inline-block;
+    }
+    #thot-tagline {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    #thot-profile-info {
+        padding: 10px;
+        padding-bottom: 110px;
+    }
+    #thot-profile-actions {
+        bottom: 0;
+        height: 100px;
+        background: white;
+        width: 100%;
+        position: fixed;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+    #thot-profile-message {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+        #thot-profile-back {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(-50% - 3em), -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+        #thot-profile-like {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(-50% + 3em), -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+</style>
 <div id="thot-profile-holder">
     <div id="thot-profile-img-holder"></div>
+    <div id="thot-profile-info">
+        <div id="thot-username">Jasmine7899</div>
+        <div id="thot-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
+        <div id="thot-sign">♑ Capricorn</div>
+        <div id="thot-tagline">Down in Miami for Spring Break.</div>
+                <div id="thot-age">25</div>
+        
+        <div id="thot-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo</div>
+    </div>
+    <div id="thot-profile-actions">
+        <div id="thot-profile-message">
+            <i class="fa-solid fa-message"></i>
+        </div>
+        <div id="thot-profile-back">
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </div>
+        <div id="thot-profile-like">
+            <i class="fa-regular fa-heart"></i>
+        </div>
+    </div>
 </div>
 {{> footer }}
