@@ -46,19 +46,6 @@ function initMySQL() {
 
 initMySQL();
 
-
-function recordInstagramLike(post_url) {
-var q = "INSERT INTO instagram_likes(post_url) VALUES(?)"
-con.query(q, [post_url], (error, results) => {
-    if (error) {
-        console.log(error)
-    } else {
-        console.log("Leaderboards Logged Successfully")
-    }
-});
-}
-
 module.exports = {
-    con,
-    recordInstagramLike
+    con
 }

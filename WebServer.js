@@ -190,4 +190,33 @@ app.get('/onboarding', (req, res) => {
     )
 });
 
+async function verifyGoogleToken(token, res, req) {
+    const ticket = await googleOAuthClient.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+    });
+    const payload = ticket.getPayload();
+    const userid = payload['sub'];
+    user_data = await User.loginOrRegisterGoogle(payload, req.cookies['lang'])
+
+    //Set Cookie
+    res.cookie('uid',user_data.email, { maxAge: 1314000000000, httpOnly: true });
+    res.cookie('auth_key',user_data.auth_key, { maxAge: 1314000000000, httpOnly: true });
+    res.redirect('/')
+    return;
+
+
+
+    // If request specified a G Suite domain:
+    // const domain = payload['hd'];
+  }
+
+  app.post("/google-auth", async (req, res) => {
+    //todo: csrf verification? Dumb..
+    console.log("POST google auth code:", req.body)
+    verifyGoogleToken(req.body.credential, res, req).catch(console.error);
+  });
+
 //app.get('/update', (req, res) => { res.send(JSON.stringify(Stats.stats)) });
