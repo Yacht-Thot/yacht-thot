@@ -80,20 +80,58 @@ app.get('/thot', (req, res) => {
     )
 });
 
+var sample_thots = [
+    {
+        username: "Alicia8594",
+        age: "19",
+        location: "Miami, FL",
+        tagline: "Staying bad and bouji",
+        photo_url: "/img/sample/alicia.jpg"
+    },
+    {
+        username: "Baily_Jane",
+        age: "22",
+        location: "Omaha, NA",
+        tagline: "A southern girl looking for boats",
+        photo_url: "/img/sample/baily.jpg"
+    },
+    {
+        username: "Veazy",
+        age: "34",
+        location: "Jacksonville, FL",
+        tagline: "I promise not to weigh down your boat.",
+        photo_url: "/img/sample/veazy.jpg"
+    }
+]
 app.get('/captain-feed', (req, res) => {
     res.render('captain-feed',
         {
            title: "Yacht Thot - Home",
-           description: ""
+           description: "",
+           thots: sample_thots
         }
     )
 });
+
+var sample_capns = [
+    {
+        username: "El_Capitan69"
+    },
+    {
+        username: "LokoPirate"
+    },
+    {
+        username: "Boat_Guy777"
+    }
+
+]
 
 app.get('/thot-feed', (req, res) => {
     res.render('thot-feed',
         {
            title: "Yacht Thot - Home",
-           description: ""
+           description: "",
+           captains: sample_capns
         }
     )
 });

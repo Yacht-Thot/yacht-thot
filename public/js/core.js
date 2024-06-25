@@ -59,6 +59,17 @@ function showStep(step) {
 
 }
 
+if(document.getElementById("thot-profile-like")) {
+    document.getElementById("thot-profile-like").onclick = function() {
+        document.getElementById("thot-profile-like-icon").classList.toggle("fa-solid")
+        document.getElementById("thot-profile-like-icon").classList.toggle("fa-regular")
+        document.getElementById("thot-profile-like-icon").classList.toggle("green-icon")
+    }
+    document.getElementById("thot-profile-back").onclick = function() {
+        window.location.href = "/captain-feed"
+    }
+}
+
 /** setInterval(function() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {

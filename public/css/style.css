@@ -41,6 +41,9 @@ body {
     height: 100%;
     float: left;
 }
+.green-icon {
+    color: dodgerblue;
+}
 #thot-profile-holder {
     position: absolute;
     top: 0;
@@ -49,7 +52,7 @@ body {
     bottom: 0;
 }
 #thot-profile-img-holder {
-    background: url(/img/sample/thot.jpg);
+    background: url(/img/sample/alicia.jpg);
     width: 100%;
     aspect-ratio: 9 / 16;
     background-size: cover;
@@ -164,7 +167,7 @@ body {
 #user-profile {
     left: 0;
     top: 0;
-    height: 100vh;
+    height: fit-content;
     padding: 0;
     padding-top: 50px;
     width: 100vw;
@@ -174,13 +177,17 @@ body {
 
 #user-profile h1 {
     font-family: sans-serif;
+    text-align: center;
 }
 
 #profile-tagline {
     font-family: sans-serif;
     font-style: italic;
-    text-align: center;
-    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+.amenity-checklist {
+    font-size: 1.5em;
 }
 
 #profile-image-holder {
@@ -189,6 +196,15 @@ body {
     background-image: url(/img/sample/boat.webp);
     background-size: cover;
     border-radius: 10px;
+}
+.captain-feed-spec {
+    display: inline-block;
+    width: calc(50% - 2px);
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid lightgrey;
+    text-align: center;
+    font-family: sans-serif;
 }
 
 #profile-event-month {
@@ -218,10 +234,6 @@ body {
     font-size: .8em;
     top: calc(20px + 50%);
     width: 90%;
-    left: 50%;
-    position: absolute;
-    /* line-height: 100%; */
-    transform: translate(-50%, -50%);
 }
 #profile-event-theme {
     position: absolute;
@@ -266,12 +278,19 @@ body {
   }
 
   #profile-location {
-    font-size: 2em;
-    text-align: center;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 1.5em;
   }
   #profile-bio {
     width: 90%;
     margin: auto;
+    padding-top: 25px;
+  }
+  #profile-features {
+    width: 90%;
+    margin: auto;
+    padding-top: 25px;
   }
 
   #profile-events {

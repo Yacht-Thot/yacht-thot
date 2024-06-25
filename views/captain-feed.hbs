@@ -1,2 +1,114 @@
 {{> header }}
+<style>
+    #main-content {
+        display: none;
+    }
+    #captain-feed {
+        font-family: sans-serif;
+        padding-top: 50px;
+    }
+    .thot-feed-img {
+    background: url(/img/sample/alicia.jpg);
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-size: cover;
+    }
+    .thot-profile-link {
+        text-decoration: none;
+        color: black;
+    }
+    .thot-feed-username {
+        font-size: 2em;
+        margin-top: 10px;
+    }
+    .thot-feed-item {
+        padding: 20px;
+    }
+    .thot-feed-age {
+        font-size: 3em;
+        position: absolute;
+        right: 20px;
+        bottom: 160px;
+    }
+    .thot-feed-location {
+
+    }
+    .thot-feed-item {
+         position: relative;
+    }
+    .thot-profile-actions {
+        height: 100px;
+        position: relative;
+        background: white;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .thot-profile-message {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+    .thot-profile-goto {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(-50% - 3em), -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+    .thot-profile-like {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(calc(-50% + 3em), -50%);
+        border: 1px solid gray;
+        border-radius: 50%;
+        padding: 20px;
+        font-size: 2em;
+    }
+</style>
+<div id="captain-feed">
+    {{#each thots}}
+    
+    <div class="thot-feed-item">
+        <a class='thot-profile-link' href="/thot">
+        <div class="thot-feed-img">
+        </div>
+        </a>
+        <div class="thot-feed-username">
+            {{username}}
+        </div>
+        <div class="thot-feed-location">
+            <i class="fa-solid fa-location-dot"></i> {{location}}
+        </div>
+        <div class="thot-feed-tagline">
+            {{tagline}}
+        </div>
+        <div class="thot-feed-age">
+            {{age}}
+        </div>
+
+        <div class="thot-profile-actions">
+            <div class="thot-profile-message">
+                <i class="fa-solid fa-message"></i>
+            </div>
+            <div class="thot-profile-goto">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="thot-profile-like">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+        </div>
+
+    </div>
+    
+    {{/each}}
+</div>
 {{> footer }}
