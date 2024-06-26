@@ -117,6 +117,19 @@ app.get('/profile', async (req, res) => {
     )
 });
 
+app.get('/my-profile', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    res.render('captain',
+        {
+           title: "Yacht Thot - " + user_data.username,
+           description: "",
+           user_data: user_data
+        }
+    )
+});
+
 var sample_thots = [
     {
         username: "Alicia",
