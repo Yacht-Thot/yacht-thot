@@ -60,7 +60,7 @@ app.get('/', async (req, res) => {
 
 var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 if(user_data != -1) {
-    res.redirect("/captain-feed")
+    res.redirect("/feed")
 } else {
     var google_redirect_url = "http://localhost:8069/google-auth"
     if(!inLocalDevMode()) {
