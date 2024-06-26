@@ -12,6 +12,17 @@ const googleOAuthClient = new OAuth2Client();
 const Util = require("./src/Util.js");
 const User = require("./src/User.js");
 
+function inLocalDevMode() {
+    if(process.env.DEV === "LOCALHOST") {
+        return true;
+    } 
+    return false;
+}
+
+
+if(inLocalDevMode()) {
+    console.log("Starting Server in DEV mode")
+}
 // Setup WebServer
 const app = express();
 
@@ -52,6 +63,9 @@ if(user_data != -1) {
     res.redirect("/captain-feed")
 } else {
     var google_redirect_url = "http://localhost:8069/google-auth"
+    if(!inLocalDevMode()) {
+        google_redirect_url = "https://yachtthot.com/google-auth"
+    }
         res.render('index',
             {
             title: "Yacht Thot - Party Boats Near Me",
