@@ -57,44 +57,48 @@ if(user_data != -1) {
             title: "Yacht Thot - Party Boats Near Me",
             description: "",
             google_client_id: process.env.GOOGLE_CLIENT_ID,
-            google_redirect_url: google_redirect_url
+            google_redirect_url: google_redirect_url,
+            user_data: user_data
             }
         )
     }
 });
 
-app.get('/faq', (req, res) => {
+app.get('/faq', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('faq',
         {
            title: "Yacht Thot - FAQs",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/support', (req, res) => {
+app.get('/support', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('support',
         {
            title: "Yacht Thot - Support",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/captain', (req, res) => {
+app.get('/profile', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('captain',
         {
            title: "Yacht Thot - Username",
-           description: ""
-        }
-    )
-});
-
-app.get('/thot', (req, res) => {
-    res.render('thot',
-        {
-           title: "Yacht Thot - Username",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
@@ -122,12 +126,16 @@ var sample_thots = [
         photo_url: "/img/sample/veazy.jpg"
     }
 ]
-app.get('/captain-feed', (req, res) => {
+app.get('/feed', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('captain-feed',
         {
            title: "Yacht Thot - Home",
            description: "",
-           thots: sample_thots
+           thots: sample_thots,
+           user_data: user_data
         }
     )
 });
@@ -145,66 +153,67 @@ var sample_capns = [
 
 ]
 
-app.get('/thot-feed', (req, res) => {
-    res.render('thot-feed',
-        {
-           title: "Yacht Thot - Home",
-           description: "",
-           captains: sample_capns
-        }
-    )
-});
+app.get('/privacy-policy', async (req, res) => {
 
-app.get('/privacy-policy', (req, res) => {
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('privacy-policy',
         {
            title: "Yacht Thot - Privacy Policy",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/terms-of-service', (req, res) => {
+app.get('/terms-of-service', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('terms-of-service',
         {
            title: "Yacht Thot - Terms of Service",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/boat', (req, res) => {
-    res.render('boat',
-        {
-           title: "Yacht Thot - Boat Profile",
-           description: ""
-        }
-    )
-});
+app.get('/sign-in', async (req, res) => {
 
-app.get('/sign-in', (req, res) => {
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('sign-in',
         {
            title: "Yacht Thot - Sign In",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('about',
         {
            title: "Yacht Thot - About Us",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });
 
-app.get('/onboarding', (req, res) => {
+app.get('/onboarding', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
     res.render('onboarding',
         {
            title: "Yacht Thot - Onboarding",
-           description: ""
+           description: "",
+           user_data: user_data
         }
     )
 });

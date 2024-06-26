@@ -136,6 +136,7 @@ body {
     background: white;
     position: fixed;
     width: 100%;
+    top: 50px;
     transition: transform 1s;
     transform: translateY(calc(-100% - 50px));
 }
@@ -179,9 +180,10 @@ body {
 
 #user-profile h1 {
     text-align: center;
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: normal;
     margin: 10px;
+    margin-top: 20px;
     font-family: sans-serif;
 }
 

@@ -24,6 +24,35 @@
     font-size: .8em;
     padding: 5px;
     }
+    .boat-stats {
+        font-family: sans-serif;
+        padding-bottom: 25px;
+    }
+    .captain-feed-specs {
+        padding: 10px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+    }
+    .ctl {
+            border-top: 0px;
+    border-left: 0px;
+    padding-bottom: 5px;
+    }
+    .ctr {
+            border-top: 0px;
+            border-right: 0px;
+            padding-bottom: 5px;
+    }
+    .cbl {
+        border-bottom: 0px;
+        border-left: 0px;
+        padding-top: 5px;
+    }
+    .cbr {
+        border-bottom: 0px;
+        border-right: 0px;
+        padding-top: 5px;
+    }
 </style>
 <div id ="user-profile">
 <div id="profile-image-holder">
@@ -31,26 +60,41 @@
 </div>
 <div id="profile-info-header">
     <div id="profile-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
-    <div id="profile-make-model">Schaefer 660</div>
+    <div id="profile-make-model"></div>
     <h1 id="profile-username">el_capitan69</h1>
+    <div style="padding:20px">
     <div class="captain-feed-specs">
-        <div class="captain-feed-spec">
-            <i class="fa-solid fa-ruler"></i> Boat Length: 10ft
-        </div><div class="captain-feed-spec">
-            <i class="fa-solid fa-users"></i> Boat Capacity: 5
-        </div><div class="captain-feed-spec">
-            <i class="fa-solid fa-toilet"></i> Bathrooms: 5
-        </div><div class="captain-feed-spec">
-            <i class="fa-solid fa-bed"></i> Bedrooms: 5
+        <div class="captain-feed-spec ctl">
+            <i class="fa-solid fa-ruler"></i> Length: 10ft
+        </div><div class="captain-feed-spec ctr">
+            <i class="fa-solid fa-users"></i> Capacity: 5
+        </div><div class="captain-feed-spec cbl">
+            <i class="fa-solid fa-sailboat"></i> Schaefer 660
+        </div><div class="captain-feed-spec cbr">
+            <i class="fa-solid fa-calendar"></i> Year: 2020
         </div>
+    </div>
     </div>
     <div id="profile-tagline">Hosting Charters at a Low Rate</div>
     <div id="profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo</div>
 </div>
 <div id="profile-features">
     <h2>Amenities</h2>
+    <div class="boat-stats">
+        <i class="fa-solid fa-toilet"></i> Bathrooms: 5<br>
+        <i class="fa-solid fa-bed"></i> Bedrooms: 5<br>
+        <i class="fa-solid fa-ruler-combined"></i> Floors: 2
+    </div>
+   
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Bimini Top/Shade</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Coolers</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Air Conditioning</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Shower</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Fridge</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Grill</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Bunny Pad</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Fold-out Terrace</div>
     <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Hot Tub</div>
-    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> A/C</div>
 </div>
 <!-- THOTS ONLY
 <div id="profile-rating"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
