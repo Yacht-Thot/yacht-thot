@@ -54,7 +54,8 @@ body {
 #thot-profile-img-holder {
     background: url(/img/sample/alicia.jpg);
     width: 100%;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 1;
+    background-position: center;
     background-size: cover;
 }
 #main-content {
@@ -176,8 +177,10 @@ body {
 }
 
 #user-profile h1 {
-    font-family: sans-serif;
     text-align: center;
+    font-size: 3em;
+    font-weight: normal;
+    margin: 10px;
 }
 
 #profile-tagline {

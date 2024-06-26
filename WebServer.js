@@ -3,9 +3,14 @@ const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require("path");
+
 require('dotenv').config({ path: './app.env' })
 
+const {OAuth2Client} = require('google-auth-library');
+const googleOAuthClient = new OAuth2Client();
+
 const Util = require("./src/Util.js");
+const User = require("./src/User.js");
 
 // Setup WebServer
 const app = express();
@@ -33,15 +38,24 @@ app.set('view engine', 'hbs');
 app.listen(process.env.HTTP_PORT, () => 
     console.log(`Listening for HTTP on port ${process.env.HTTP_PORT}!`));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     //res.cookie('uid', "", { maxAge: 0 });
    // res.cookie('auth_key',"", { maxAge: 0 });
-    res.render('index',
-        {
-           title: "Yacht Thot - Party Boats Near Me",
-           description: ""
-        }
-    )
+
+var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+if(user_data != -1) {
+    res.redirect("/captain-feed")
+} else {
+    var google_redirect_url = "http://localhost:8069/google-auth"
+        res.render('index',
+            {
+            title: "Yacht Thot - Party Boats Near Me",
+            description: "",
+            google_client_id: process.env.GOOGLE_CLIENT_ID,
+            google_redirect_url: google_redirect_url
+            }
+        )
+    }
 });
 
 app.get('/faq', (req, res) => {
@@ -82,21 +96,21 @@ app.get('/thot', (req, res) => {
 
 var sample_thots = [
     {
-        username: "Alicia8594",
+        username: "Alicia",
         age: "19",
         location: "Miami, FL",
         tagline: "Staying bad and bouji",
         photo_url: "/img/sample/alicia.jpg"
     },
     {
-        username: "Baily_Jane",
+        username: "Baily",
         age: "22",
         location: "Omaha, NA",
         tagline: "A southern girl looking for boats",
         photo_url: "/img/sample/baily.jpg"
     },
     {
-        username: "Veazy",
+        username: "Jane",
         age: "34",
         location: "Jacksonville, FL",
         tagline: "I promise not to weigh down your boat.",
@@ -115,13 +129,13 @@ app.get('/captain-feed', (req, res) => {
 
 var sample_capns = [
     {
-        username: "El_Capitan69"
+        username: "Nick"
     },
     {
-        username: "LokoPirate"
+        username: "Jack"
     },
     {
-        username: "Boat_Guy777"
+        username: "Dave"
     }
 
 ]
@@ -198,11 +212,11 @@ async function verifyGoogleToken(token, res, req) {
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
     const payload = ticket.getPayload();
-    const userid = payload['sub'];
-    user_data = await User.loginOrRegisterGoogle(payload, req.cookies['lang'])
+    const google_user_id = payload['sub'];
+    user_data = await User.loginOrRegisterGoogle(payload)
 
     //Set Cookie
-    res.cookie('uid',user_data.email, { maxAge: 1314000000000, httpOnly: true });
+    res.cookie('uid',google_user_id, { maxAge: 1314000000000, httpOnly: true });
     res.cookie('auth_key',user_data.auth_key, { maxAge: 1314000000000, httpOnly: true });
     res.redirect('/')
     return;
