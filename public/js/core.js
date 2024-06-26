@@ -119,3 +119,7 @@ var test_data = [
         event_datetime: ""
     }
 ]
+
+function showMessagesInterface() {
+
+}

@@ -32,8 +32,10 @@
     width: 100%;
     background-image: url(/img/sample/boat.webp);
     background-size: cover;
+    position: relative;
 }
 .captain-feed-info {
+    position: relative;
     padding: 10px;
 }
 .captain-feed-username {
@@ -49,14 +51,37 @@
     text-decoration: none;
 
 }
+.captain-feed-location {
+    color: dimgray;
+}
+.captain-feed-make-model {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: dimgray;
+    font-family: sans-serif;
+}
+.profile-image-counter {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
+    }
 </style>
 <div id="thot-feed">
     {{#each captains}}
         <a class='captain-feed-link' href="/captain">
         <div class="captain-profile">
             <div class="captain-profile-photo">
+                <div class="profile-image-counter">1/1</div>
             </div>
             <div class="captain-feed-info">
+                <div class="captain-feed-make-model">Schaefer 660</div>
                 <div class="captain-feed-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
                 <div class="captain-feed-username">{{username}}</div>
                 <div class="captain-feed-ne"><i class="fa-solid fa-calendar-days"></i> Next Event: TBD</div>

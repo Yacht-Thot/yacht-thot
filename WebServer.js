@@ -38,9 +38,14 @@ app.set('view engine', 'hbs');
 app.listen(process.env.HTTP_PORT, () => 
     console.log(`Listening for HTTP on port ${process.env.HTTP_PORT}!`));
 
+
+app.get('/logout', (req, res) => {
+    res.cookie('uid', "", { maxAge: 0 });
+    res.cookie('auth_key',"", { maxAge: 0 });
+    res.redirect("/")
+})
+
 app.get('/', async (req, res) => {
-    //res.cookie('uid', "", { maxAge: 0 });
-   // res.cookie('auth_key',"", { maxAge: 0 });
 
 var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 if(user_data != -1) {

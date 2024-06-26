@@ -3,13 +3,36 @@
     #main-content {
         display: none;
     }
+    #profile-make-model {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    color: dimgray;
+    font-family: sans-serif;
+    }
+    #profile-info-header {
+        position: relative;
+    }
+    #profile-image-counter {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
+    }
 </style>
 <div id ="user-profile">
 <div id="profile-image-holder">
+    <div id="profile-image-counter">1/1</div>
 </div>
 <div id="profile-info-header">
     <div id="profile-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
-    <h1 id="profile-username">Nick</h1>
+    <div id="profile-make-model">Schaefer 660</div>
+    <h1 id="profile-username">el_capitan69</h1>
     <div class="captain-feed-specs">
         <div class="captain-feed-spec">
             <i class="fa-solid fa-ruler"></i> Boat Length: 10ft
@@ -27,6 +50,7 @@
 <div id="profile-features">
     <h2>Amenities</h2>
     <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Hot Tub</div>
+    <div class="amenity-checklist"><i class="fa-solid fa-square-check"></i> A/C</div>
 </div>
 <!-- THOTS ONLY
 <div id="profile-rating"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
