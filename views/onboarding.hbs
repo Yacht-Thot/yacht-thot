@@ -1,6 +1,6 @@
 {{> header }}
 <style>
-    #step2-CAPTAIN, #step2-THOT {
+    #step2-CAPTAIN, #step2-THOT, #step3-CAPTAIN {
         opacity: 0;
         transition: opacity 1s;
         display: none
@@ -32,7 +32,17 @@
             </div>
             <div id="step2-CAPTAIN">
                 <h2>Enter a Username</h2>
+                 <input placeholder="Username.."/>
+                <h2>Enter Boat Make/Model</h2>
+                <input id="captain-boat-make-model" placeholder="Make/Model"/>
                 <h2>Enter a Tagline</h2>
+                <textarea id="captain-tagline" maxlength="20"></textarea>
+                <h2>Enter a Bio</h2>
+                <textarea id="captain-bio"></textarea>
+                <div id="onboarding-captain-next" class="onboarding-button">Next</div>
+            </div>
+            <div id="step3-CAPTAIN">
+                <div id="onboarding-captain-submit" class="onboarding-button">Get Started</div>
             </div>
             <div id="step2-THOT">
                 <h2>Enter a Username</h2>
@@ -49,6 +59,10 @@
 
 </div>
 <script>
+
+    document.getElementById("onboarding-captain-next").onclick = function() {
+        showStep(3)
+    }
 
     var role = ""
     document.getElementById("onboard-captain").onclick = function() {
@@ -81,7 +95,14 @@
             }, 1000)
         break;
         case 3:
-
+            document.getElementById("step2-" + role).style.opacity = "0"
+            
+            setTimeout(function() {
+             document.getElementById("step2-" + role).style.display = "none"
+            document.getElementById("step3-" + role).style.display = "block"
+            document.getElementById("step3-" + role).style.opacity = "1"
+            
+            }, 1000)
         break;
         case 4:
 
