@@ -47,6 +47,21 @@ async function getUserData(user_id, key) {
     });
 }
 
+async function submitOnboarding(user_data, payload){
+    return new Promise(resolve => {
+
+        
+        var q1 = "UPDATE users SET role = ?, username = ?"
+    
+        DB.con.query(q1, [payload.role, payload.username, payload.birthday, payload.tagline, payload.bio], (error, result) => {
+            if (error) {
+                console.log(error)
+            } else {
+                resolve()
+            }
+        });
+        });
+}
 
 async function loginOrRegisterGoogle(payload) {
   
@@ -122,6 +137,7 @@ async function registerUser(new_user_data_p, token_p, exp) {
 
 
 module.exports = {
+    submitOnboarding,
     getUserData,
     loginOrRegisterGoogle
 }
