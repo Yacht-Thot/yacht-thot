@@ -18,40 +18,38 @@ if(document.getElementById("thot-profile-like")) {
 }
 
 /** setInterval(function() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var stats = JSON.parse(this.responseText)
-            var followers_total = 0;
-            var following_total = 0;
-            for (var key in stats) {
-                if (stats.hasOwnProperty(key)) {
-                    document.getElementById(key).innerHTML = stats[key];
-                    if(key.includes("followers")) {
-                        try {
-                            followers_total = followers_total + parseInt(stats[key])
-                        } catch(e) {}
-                    }
-                    if(key.includes("following")) {
-                        try {
-                            following_total = following_total + parseInt(stats[key])
-                        } catch(e) {}
-                    }
-                }
-            }
 
-            document.getElementById("followers-total").innerHTML = followers_total;
-            document.getElementById("following-total").innerHTML = following_total;
-
-            console.log(stats["log"])
-        }
-    }
-    xhttp.open("GET", "/update", true);
-    xhttp.send();
 }, 1000);
 
 **/
+if(document.getElementById("onboarding-submit-thot")) {
+    document.getElementById("onboarding-submit-thot").onclick = function() {
+        submitOnboarding()
+    }
+}
+function submitOnboarding() {
+    console.log("T")
 
+    var payload = {
+        role: role,
+        username: document.getElementById("thot-username").value,
+        birthday: document.getElementById("thot-birthday").value,
+        tagline: document.getElementById("thot-tagline").value,
+        bio: document.getElementById("thot-bio").value
+
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+           console.log(this.responseText)
+
+            
+        }
+    }
+    xhttp.open("POST", "/submit-onboarding", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify( payload ));
+}
 function populateEvents() {
    // document.getElementById("no-profile-events").style.display = "none";
 }
