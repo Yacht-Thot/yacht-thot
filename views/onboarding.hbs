@@ -1,6 +1,6 @@
 {{> header }}
 <style>
-    #step2-CAPTAIN, #step2-THOT, #step3-CAPTAIN {
+    #step2-CAPTAIN, #step2-THOT, #step3-CAPTAIN, #step4-CAPTAIN {
         opacity: 0;
         transition: opacity 1s;
         display: none
@@ -22,6 +22,9 @@
     #onboarding {
         text-transform: lowercase;
     }
+    .onboarding-feed-specs input {
+        width: 2em;
+    }
 </style>
 <div id="onboarding">
            <div class="centered">
@@ -33,7 +36,7 @@
             <div id="step2-CAPTAIN">
                 <h2>Enter a Username</h2>
                  <input placeholder="Username.."/>
-                <h2>Enter Boat Make/Model</h2>
+                <h2>Enter Boat</h2>
                 <input id="captain-boat-make-model" placeholder="Make/Model"/>
                 <h2>Enter a Tagline</h2>
                 <textarea id="captain-tagline" maxlength="20"></textarea>
@@ -42,6 +45,38 @@
                 <div id="onboarding-captain-next" class="onboarding-button">Next</div>
             </div>
             <div id="step3-CAPTAIN">
+                    <div class="captain-feed-specs onboarding-feed-specs">
+                        <div class="captain-feed-spec ctl">
+                            <i class="fa-solid fa-sailboat"></i> Schaefer 660
+                        </div><div class="captain-feed-spec ctr">
+                             <i class="fa-solid fa-calendar"></i> Year: <input id='captain-onboarding-year' placeholder="2020"/>
+                        </div><div class="captain-feed-spec cbl">
+                            <i class="fa-solid fa-ruler"></i> Length: <input id='captain-onboarding-length' placeholder="10"/>
+                        </div><div class="captain-feed-spec cbr">
+                           <i class="fa-solid fa-users"></i> Capacity: <input id='captain-onboarding-capacity' placeholder="5"/>
+                        </div>
+                    </div>
+                <h2>Bathrooms</h2>
+                    <input id="captain-boat-bathrooms" type="number" placeholder="#"/>
+                <h2>Bedrooms</h2>
+                    <input id="captain-boat-bedrooms" type="number" placeholder="#"/>
+                <h2>Floors</h2>
+                    <input id="captain-boat-floors" type="number" placeholder="#"/>
+                <div id="onboarding-captain-next-2" class="onboarding-button">Next</div>
+            </div>
+            <div id="step4-CAPTAIN">
+                <h2>Select Your Anemities</h2>
+                <div style="text-align:left">
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Bimini Top/Shade</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Coolers</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Air Conditioning</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Shower</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Fridge</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Grill</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Bunny Pad</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Fold-out Terrace</div>
+                    <div class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Hot Tub</div>
+                    </div>
                 <div id="onboarding-captain-submit" class="onboarding-button">Get Started</div>
             </div>
             <div id="step2-THOT">
@@ -60,6 +95,20 @@
 </div>
 <script>
 
+    var anemity_checklists = document.getElementsByClassName("amenity-checklist");
+
+    for(var i = 0; i < anemity_checklists.length; i++) {
+        let icon = anemity_checklists[i].children[0];
+        anemity_checklists[i].onclick = function() {
+            icon.classList.toggle("fa-regular")
+            icon.classList.toggle("fa-solid")
+        }
+    }
+
+
+    document.getElementById("onboarding-captain-next-2").onclick = function() {
+        showStep(4)
+    }
     document.getElementById("onboarding-captain-next").onclick = function() {
         showStep(3)
     }
@@ -105,7 +154,14 @@
             }, 1000)
         break;
         case 4:
-
+            document.getElementById("step3-" + role).style.opacity = "0"
+            
+            setTimeout(function() {
+             document.getElementById("step3-" + role).style.display = "none"
+            document.getElementById("step4-" + role).style.display = "block"
+            document.getElementById("step4-" + role).style.opacity = "1"
+            
+            }, 1000)
         break;
     }
 
