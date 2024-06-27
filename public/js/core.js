@@ -6,59 +6,6 @@ document.getElementById("mobile-menu").onclick = function() {
 }
 
 
-if(document.getElementById("onboard-captain")) {
-document.getElementById("onboard-captain").onclick = function() {
-    var glb = document.getElementsByClassName("g_id_signin")[0]
-
-    glb.style.display = "inherit"
-
-    if(document.getElementById("onboard-thot").classList.contains("active-onboarding")) {
-        document.getElementById("onboard-thot").classList.remove("active-onboarding")
-    }
-    document.getElementById("onboard-captain").classList.add("active-onboarding")
-}
-
-document.getElementById("onboard-thot").onclick = function() {
-    var glb = document.getElementsByClassName("g_id_signin")[0]
-
-    glb.style.display = "inherit"
-    if(document.getElementById("onboard-captain").classList.contains("active-onboarding")) {
-        document.getElementById("onboard-captain").classList.remove("active-onboarding")
-    }
-    document.getElementById("onboard-thot").classList.add("active-onboarding")
-}
-}
-function showStep(step) {
-    switch(step) {
-        case 1:
-            document.getElementById("step2-1").style.opacity = "0"
-            document.getElementById("step2-2").style.opacity = "0"
-            setTimeout(function() {
-                document.getElementById("step2-1").style.opacity = "1"
-                document.getElementById("step2-2").style.opacity = "1"
-                }, 1000)
-        break;
-        case 2:
-            document.getElementById("step1-1").style.opacity = "0"
-            document.getElementById("step1-2").style.opacity = "0"
-            
-            setTimeout(function() {
-            document.getElementById("step1-1").style.display = "none"
-            document.getElementById("step1-2").style.display = "none"
-            document.getElementById("step2-1").style.opacity = "1"
-            document.getElementById("step2-2").style.opacity = "1"
-            }, 1000)
-        break;
-        case 3:
-
-        break;
-        case 4:
-
-        break;
-    }
-
-}
-
 if(document.getElementById("thot-profile-like")) {
     document.getElementById("thot-profile-like").onclick = function() {
         document.getElementById("thot-profile-like-icon").classList.toggle("fa-solid")

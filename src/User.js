@@ -77,6 +77,30 @@ async function loginOrRegisterGoogle(payload) {
     });
 }
 
+async function checkIfUsernameExists(username) {
+    return new Promise(resolve => {
+        var q = "SELECT FROM users WHERE username = ?";
+        DB.con.query(q1, [username], (error, results) => {
+            if (error) {
+                console.log(error)
+            } else {
+                if(results.length > 0) {
+                    resolve(true)
+                } else {
+                    resolve(false)
+                }
+            }
+        });
+});
+}
+
+async function onboardUser(uid, username, res) {
+    var username_exists = await checkIfUsernameExists(username)
+    if(username_exists) {
+        res.send("username-exists")
+    }
+}
+
 async function registerUser(new_user_data_p, token_p, exp) {
     return new Promise(resolve => {
 
@@ -84,7 +108,7 @@ async function registerUser(new_user_data_p, token_p, exp) {
         let token = token_p;
         
             console.log("Registering Google User:",new_user_data);
-            var q1 = "INSERT into users(google_account_id, email, username, auth_key, auth_exp) VALUES (?,?,?,?,?)";
+            var q1 = "INSERT into users(google_account_id, email, display_name, auth_key, auth_exp) VALUES (?,?,?,?,?)";
             DB.con.query(q1, [new_user_data.sub, new_user_data.email, new_user_data.name, token, exp], (error, result) => {
                 if (error) {
                     console.log(error)

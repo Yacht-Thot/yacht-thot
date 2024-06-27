@@ -117,6 +117,19 @@ app.get('/profile', async (req, res) => {
     )
 });
 
+app.get('/messages', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    res.render('messages',
+        {
+           title: "Yacht Thot - Messages",
+           description: "",
+           user_data: user_data
+        }
+    )
+});
+
 app.get('/my-profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);

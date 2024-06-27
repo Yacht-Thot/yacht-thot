@@ -1,7 +1,7 @@
 {{> header }}
 <div id="onboarding">
     <div id="onboarding-right">
-        <div class="centered">
+        <div>
             <div id="step1-1">
                 <h2>Which One Are You?</h2>
                 <div id="onboard-captain" class="onboarding-button"><i class="fa-solid fa-anchor"></i> Boat Owner</div>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div id="onboarding-left">
-    <div class="centered">
+    <div>
         <div id="step1-2">
             <h1>Party Boats Near Me</h1>
             <div id="onboarding-about">Set sail for an unforgettable adventure with Yacht Thot, your premier destination for matching boat owners with yacht thots.</div>
@@ -36,4 +36,28 @@
 </div>
 
 </div>
+<script>
+    if(document.getElementById("onboard-captain")) {
+document.getElementById("onboard-captain").onclick = function() {
+    var glb = document.getElementsByClassName("g_id_signin")[0]
+
+    glb.style.display = "inherit"
+
+    if(document.getElementById("onboard-thot").classList.contains("active-onboarding")) {
+        document.getElementById("onboard-thot").classList.remove("active-onboarding")
+    }
+    document.getElementById("onboard-captain").classList.add("active-onboarding")
+}
+
+document.getElementById("onboard-thot").onclick = function() {
+    var glb = document.getElementsByClassName("g_id_signin")[0]
+
+    glb.style.display = "inherit"
+    if(document.getElementById("onboard-captain").classList.contains("active-onboarding")) {
+        document.getElementById("onboard-captain").classList.remove("active-onboarding")
+    }
+    document.getElementById("onboard-thot").classList.add("active-onboarding")
+}
+}
+</script>
 {{> footer }}

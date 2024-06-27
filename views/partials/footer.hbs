@@ -2,6 +2,12 @@
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/privacy-policy">Privacy Policy</a>
    </div>
+   <script>
+          var user_data = "{{json user_data}}"
+            user_data = user_data.replace(/&quot;/g, '\"');
+            user_data = JSON.parse(user_data);
+            console.log("User Data:", user_data)
+   </script>
    <script type="module" src='/js/core.js?v={{current_version}}'></script>
    <script src="https://accounts.google.com/gsi/client" async defer></script>
     </body>

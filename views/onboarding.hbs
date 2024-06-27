@@ -1,11 +1,93 @@
 {{> header }}
-<div id="onboarding">
-    <div id="">
+<style>
+    #step2-CAPTAIN, #step2-THOT {
+        opacity: 0;
+        transition: opacity 1s;
+        display: none
+    }
 
-    </div>
-    <div id="">
-        
-    </div>
+    input, textarea {
+    color: white;
+    background: none;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    text-align: center;
+    color-scheme: dark;
+    }
+
+    #onboarding-submit {
+
+    }
+    #onboarding {
+        text-transform: lowercase;
+    }
+</style>
+<div id="onboarding">
+           <div class="centered">
+            <div id="step1-1">
+                <h2>Which One Are You?</h2>
+                <div id="onboard-captain" class="onboarding-button"><i class="fa-solid fa-anchor"></i> Boat Owner</div>
+                <div id="onboard-thot" class="onboarding-button"><i class="fa-solid fa-person-dress"></i> Yacht Thot</div>
+            </div>
+            <div id="step2-CAPTAIN">
+                <h2>Enter a Username</h2>
+                <h2>Enter a Tagline</h2>
+            </div>
+            <div id="step2-THOT">
+                <h2>Enter a Username</h2>
+                <input placeholder="Username.."/>
+                <h2>Enter Birthday</h2>
+                <input type="date"/>
+                <h2>Enter a Tagline</h2>
+                <textarea id="thot-tagline" maxlength="20"></textarea>
+                <h2>Enter a Bio</h2>
+                <textarea id="thot-bio"></textarea>
+                <div id="onboarding-submit" class="onboarding-button">Get Started</div>
+            </div>
+        </div>
 
 </div>
+<script>
+
+    var role = ""
+    document.getElementById("onboard-captain").onclick = function() {
+        role = "CAPTAIN"
+        showStep(2)
+    }
+    document.getElementById("onboard-thot").onclick = function() {
+        role = "THOT"
+        showStep(2)
+    }
+
+    function showStep(step) {
+    switch(step) {
+        case 1:
+            document.getElementById("step2-1").style.opacity = "0"
+            document.getElementById("step2-2").style.opacity = "0"
+            setTimeout(function() {
+                document.getElementById("step2-1").style.opacity = "1"
+                document.getElementById("step2-2").style.opacity = "1"
+                }, 1000)
+        break;
+        case 2:
+            document.getElementById("step1-1").style.opacity = "0"
+            
+            setTimeout(function() {
+            document.getElementById("step1-1").style.display = "none"
+            document.getElementById("step2-" + role).style.display = "block"
+            document.getElementById("step2-" + role).style.opacity = "1"
+            
+            }, 1000)
+        break;
+        case 3:
+
+        break;
+        case 4:
+
+        break;
+    }
+
+}
+</script>
 {{> footer }}
