@@ -8,8 +8,7 @@
             user_data = JSON.parse(user_data);
             console.log("User Data:", user_data)
             if(user_data.username == null && !window.location.href.includes("/onboarding")) {
-              // window.location.href = "/onboarding"
-              //console.log(window.location.href)
+               window.location.href = "/onboarding"
             }
    </script>
    <script type="module" src='/js/core.js?v={{current_version}}'></script>

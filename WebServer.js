@@ -183,12 +183,9 @@ app.get('/feed', async (req, res) => {
 app.post('/submit-onboarding', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
-
-
     var payload = req.body;
     console.log(payload)
-    await User.submitOnboarding(user_data, payload)
-    res.send("ok")
+    User.submitOnboarding(user_data, payload, res)
     
 });
 

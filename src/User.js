@@ -47,20 +47,31 @@ async function getUserData(user_id, key) {
     });
 }
 
-async function submitOnboarding(user_data, payload){
-    return new Promise(resolve => {
-
+async function submitOnboarding(user_data, payload, res){
+    //TODO: check if username exists.
+    console.log("SUBMITTING:", payload)
+        if(payload.role == "THOT") {
+            var q1 = "UPDATE users SET role = ?, username = ?, birthday = ?, tagline = ?, bio = ? WHERE user_id = ?"
         
-        var q1 = "UPDATE users SET role = ?, username = ?"
-    
-        DB.con.query(q1, [payload.role, payload.username, payload.birthday, payload.tagline, payload.bio], (error, result) => {
-            if (error) {
-                console.log(error)
-            } else {
-                resolve()
-            }
-        });
-        });
+            DB.con.query(q1, [payload.role, payload.username, payload.birthday, payload.tagline, payload.bio, user_data.user_id], (error, result) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    res.send("ok")
+                }
+            });
+
+        } else if(payload.role == "CAPTAIN") {
+            var q1 = "UPDATE users SET role = ?, username = ?, boat_name = ?, tagline = ?, bio = ?, boat_year = ?, boat_length = ?, boat_capacity = ?, boat_bathrooms = ?, boat_bedrooms = ?, boat_floors = ?, amenities = ? WHERE user_id = ?"
+        
+            DB.con.query(q1, [payload.role, payload.username, payload.boat_name, payload.tagline, payload.bio, payload.boat_year, payload.boat_length, payload.boat_capacity, payload.boat_bathrooms, payload.boat_bedrooms, payload.boat_floors, JSON.stringify(payload.amenities), user_data.user_id], (error, result) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    res.send("ok")
+                }
+            });
+        }
 }
 
 async function loginOrRegisterGoogle(payload) {
