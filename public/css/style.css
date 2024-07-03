@@ -238,7 +238,22 @@ body {
     font-size: 1.5em;
     margin-top: 15px;
 }
-
+#action-bar {
+    position: fixed;
+    background: white;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    line-height: 65px;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+.action-bar-item {
+    width: 33%;
+    display: inline-block;
+    font-size: 2em;
+    padding-top: 8px;
+    text-align: center;
+}
 #profile-image-holder {
     aspect-ratio: 16 / 9;
     width: 100%;

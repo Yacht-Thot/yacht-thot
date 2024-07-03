@@ -1,4 +1,16 @@
-   <div id="footer">
+   {{#ifeq user_data -1}}
+    {{else}}
+    <div id="action-bar">
+      <div class="action-bar-item">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div><div class="action-bar-item">
+        <i class="fa-solid fa-user"></i>
+      </div><div class="action-bar-item">
+        <i class="fa-solid fa-message"></i>
+      </div>
+    </div>
+    {{/ifeq}}
+    <div id="footer">
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/privacy-policy">Privacy Policy</a>
    </div>

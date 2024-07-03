@@ -28,6 +28,10 @@ async function getUserData(user_id, key) {
                         if(user_data.my_devices != null) {
                             user_data.my_devices = JSON.parse(user_data.my_devices)
                         }
+
+                        if(user_data.amenities != null) {
+                            user_data.amenities = JSON.parse(user_data.amenities)
+                        }
                         
                         resolve(user_data)
 
@@ -62,9 +66,9 @@ async function submitOnboarding(user_data, payload, res){
             });
 
         } else if(payload.role == "CAPTAIN") {
-            var q1 = "UPDATE users SET role = ?, username = ?, boat_name = ?, tagline = ?, bio = ?, boat_year = ?, boat_length = ?, boat_capacity = ?, boat_bathrooms = ?, boat_bedrooms = ?, boat_floors = ?, amenities = ? WHERE user_id = ?"
+            var q1 = "UPDATE users SET role = ?, username = ?, location = ?, boat_name = ?, tagline = ?, bio = ?, boat_year = ?, boat_length = ?, boat_capacity = ?, boat_bathrooms = ?, boat_bedrooms = ?, boat_floors = ?, amenities = ? WHERE user_id = ?"
         
-            DB.con.query(q1, [payload.role, payload.username, payload.boat_name, payload.tagline, payload.bio, payload.boat_year, payload.boat_length, payload.boat_capacity, payload.boat_bathrooms, payload.boat_bedrooms, payload.boat_floors, JSON.stringify(payload.amenities), user_data.user_id], (error, result) => {
+            DB.con.query(q1, [payload.role, payload.username, payload.location, payload.boat_name, payload.tagline, payload.bio, payload.boat_year, payload.boat_length, payload.boat_capacity, payload.boat_bathrooms, payload.boat_bedrooms, payload.boat_floors, JSON.stringify(payload.amenities), user_data.user_id], (error, result) => {
                 if (error) {
                     console.log(error)
                 } else {

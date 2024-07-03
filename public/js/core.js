@@ -44,6 +44,7 @@ function submitOnboarding() {
         payload = {
             role: role,
             username: document.getElementById("captain-username").value,
+            location: document.getElementById("captain-location").value,
             boat_name: document.getElementById("captain-boat-name").value,
             tagline: document.getElementById("captain-tagline").value,
             bio: document.getElementById("captain-bio").value,
