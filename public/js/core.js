@@ -87,3 +87,38 @@ var test_data = [
 function showMessagesInterface() {
 
 }
+
+if(window.location.href.includes("/my-profile")) {
+    document.getElementById("profile-ab-icon").style.color = "dodgerblue"
+
+    if(user_data.role == "CAPTAIN") {
+        for (var key in user_data.amenities) {
+            if (user_data.amenities.hasOwnProperty(key)) {
+                if(user_data.amenities[key] == 0) {
+                    document.getElementById("pa-" + key).style.display = "none"
+                }
+            }
+        }
+    }
+
+}
+
+if(window.location.href.includes("/feed")) {
+    document.getElementById("feed-ab-icon").style.color = "dodgerblue"
+}
+
+if(window.location.href.includes("/messages")) {
+    document.getElementById("messages-ab-icon").style.color = "dodgerblue"
+}
+
+if(document.getElementById("messages-ab-icon")) {
+    document.getElementById("profile-ab").onclick = function() {
+        window.location.href = "/my-profile"
+    }
+    document.getElementById("feed-ab").onclick = function() {
+        window.location.href = "/feed"
+    }
+    document.getElementById("messages-ab").onclick = function() {
+        window.location.href = "/messages"
+    }
+}

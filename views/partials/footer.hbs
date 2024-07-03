@@ -1,12 +1,12 @@
    {{#ifeq user_data -1}}
     {{else}}
     <div id="action-bar">
-      <div class="action-bar-item">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div><div class="action-bar-item">
-        <i class="fa-solid fa-user"></i>
-      </div><div class="action-bar-item">
-        <i class="fa-solid fa-message"></i>
+      <div id="feed-ab" class="action-bar-item">
+        <i id="feed-ab-icon" class="fa-solid fa-magnifying-glass"></i>
+      </div><div id="profile-ab" class="action-bar-item">
+        <i id="profile-ab-icon" class="fa-solid fa-user"></i>
+      </div><div id="messages-ab" class="action-bar-item">
+        <i id="messages-ab-icon" class="fa-solid fa-message"></i>
       </div>
     </div>
     {{/ifeq}}

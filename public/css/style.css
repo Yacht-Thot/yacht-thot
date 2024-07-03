@@ -214,6 +214,7 @@ body {
     height: fit-content;
     padding: 0;
     padding-top: 50px;
+    padding-bottom: 50px;
     width: 100vw;
     background: white;
     color: black;
