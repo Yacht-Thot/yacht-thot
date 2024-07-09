@@ -177,6 +177,7 @@
 
 var url = new URL(window.location.href);
 
+if(url.searchParams.get("uid")) {
     setInterval(function() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -207,6 +208,7 @@ var url = new URL(window.location.href);
             xhttp.open("GET", "/refresh-messages?uid=" + url.searchParams.get("uid"), true);
             xhttp.send();
     }, 1000)
+}
 </script>
 
 {{> footer }}

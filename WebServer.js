@@ -146,8 +146,6 @@ app.get('/refresh-messages', async (req, res) => {
 
     res.send(message_chain)
 
-
-
 });
 
 app.get('/profile', async (req, res) => {
@@ -158,8 +156,15 @@ app.get('/profile', async (req, res) => {
         res.redirect("/")
         return
     }
-    
-    var profile_data = await User.getProfileData(req.query.uid)
+
+    var profile_data = user_data;
+
+    if(req.query.uid)
+        profile_data = await User.getProfileData(req.query.uid)
+
+    profile_data.age = Util.getAgeFromDOB(profile_data.birthday);
+    profile_data.a_sign = Util.findZodiacSign(profile_data.birthday)
+
 
     var r_templ = profile_data.role.toLowerCase()
 
@@ -225,6 +230,9 @@ app.get('/my-profile', async (req, res) => {
         res.redirect("/")
         return
     }
+
+    user_data.age = Util.getAgeFromDOB(user_data.birthday);
+    user_data.a_sign = Util.findZodiacSign(user_data.birthday)
 
     var r_role = user_data.role.toLowerCase();
 

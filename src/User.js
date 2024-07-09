@@ -254,7 +254,7 @@ async function getUsernamesFromList(u_uid_list) {
             addt = addt + " OR user_id = " + u_uid_list[i];
         }
         var q = "SELECT user_id, username FROM users WHERE user_id = " + u_uid_list[0] + addt;
-        console.log("USER MESSAGE LIST Q:", q)
+       // console.log("USER MESSAGE LIST Q:", q)
         DB.con.query(q, (error, users) => {
             if (error) {
                 console.log(error)
