@@ -14,6 +14,30 @@ const User = require("./src/User.js");
 
 require("./src/Daemons.js")
 
+
+var current_version;
+
+var exec = require('child_process').exec;
+function execute(command, callback){
+    exec(command, function(error, stdout, stderr){ callback(stdout); });
+};
+
+async function getVersion() {
+    return new Promise(resolve => {
+        var cmd = "git rev-list --count --first-parent HEAD";
+        execute(cmd, function(res){
+            resolve(res.trim());
+        });
+    });
+}
+
+(async function() {
+    current_version = await getVersion();
+    console.log("Starting Vesion:", current_version)
+})()
+
+
+
 function inLocalDevMode() {
     if(process.env.DEV === "LOCALHOST") {
         return true;
@@ -74,7 +98,8 @@ if(user_data != -1) {
             description: "",
             google_client_id: process.env.GOOGLE_CLIENT_ID,
             google_redirect_url: google_redirect_url,
-            user_data: user_data
+            user_data: user_data,
+            current_version: current_version
             }
         )
     }
@@ -88,7 +113,8 @@ app.get('/faq', async (req, res) => {
         {
            title: "Yacht Thot - FAQs",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -101,7 +127,8 @@ app.get('/support', async (req, res) => {
         {
            title: "Yacht Thot - Support",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -120,7 +147,8 @@ app.get('/profile', async (req, res) => {
            description: "",
            user_data: user_data,
            profile_data: profile_data,
-           show_action_bar: 1
+           show_action_bar: 1,
+           current_version: current_version
         }
     )
 });
@@ -156,7 +184,8 @@ app.get('/messages', async (req, res) => {
            message_to_username: message_to_username,
            message_to_id: message_to_uid,
            message_users: message_users,
-           message_chain: message_chain
+           message_chain: message_chain,
+           current_version: current_version
         }
     )
 });
@@ -173,7 +202,8 @@ app.get('/my-profile', async (req, res) => {
            description: "",
            user_data: user_data,
            profile_data:user_data,
-           show_action_bar: 0
+           show_action_bar: 0,
+           current_version: current_version
         }
     )
 });
@@ -198,7 +228,8 @@ app.get('/feed', async (req, res) => {
            description: "",
            thots: thots,
            captains: captains,
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -226,7 +257,8 @@ app.get('/privacy-policy', async (req, res) => {
         {
            title: "Yacht Thot - Privacy Policy",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -239,7 +271,8 @@ app.get('/terms-of-service', async (req, res) => {
         {
            title: "Yacht Thot - Terms of Service",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -252,7 +285,8 @@ app.get('/sign-in', async (req, res) => {
         {
            title: "Yacht Thot - Sign In",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -265,7 +299,8 @@ app.get('/about', async (req, res) => {
         {
            title: "Yacht Thot - About Us",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
@@ -278,7 +313,8 @@ app.get('/onboarding', async (req, res) => {
         {
            title: "Yacht Thot - Onboarding",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           current_version: current_version
         }
     )
 });
