@@ -175,6 +175,12 @@ async function getProfileData(uid) {
             if (error) {
                 console.log(error)
             } else {
+                if(results[0].amenities != null) {
+                    results[0].amenities = JSON.parse(results[0].amenities)
+                }
+                if(results[0].my_devices != null) {
+                    results[0].my_devices = JSON.parse(results[0].my_devices)
+                }
                 resolve(results[0])
             }
         });

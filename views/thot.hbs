@@ -94,6 +94,14 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
             <i id="thot-profile-like-icon" class="fa-regular fa-heart"></i>
         </div>
     </div>
+    {{else}}
+    <a href='/onboarding'><div id="edit-profile-button">Edit Profile</div></a>
     {{/ifeq}}
 </div>
+<script>
+            var profile_data = "{{json profile_data}}"
+            profile_data = profile_data.replace(/&quot;/g, '\"');
+            console.log("PROFILE DATA:", profile_data)
+            profile_data = JSON.parse(profile_data);
+</script>
 {{> footer }}

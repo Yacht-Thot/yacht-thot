@@ -153,19 +153,17 @@ if(document.getElementById("profile-image-edit")) {
     }
 }
 
-if(window.location.href.includes("/my-profile")) {
+if(window.location.href.includes("profile")) {
     document.getElementById("profile-ab-icon").style.color = "dodgerblue"
-
-    if(user_data.role == "CAPTAIN") {
-        for (var key in user_data.amenities) {
-            if (user_data.amenities.hasOwnProperty(key)) {
-                if(user_data.amenities[key] == 0) {
+    if(profile_data.role == "CAPTAIN") {
+        for (var key in profile_data.amenities) {
+            if (profile_data.amenities.hasOwnProperty(key)) {
+                if(profile_data.amenities[key] == 0) {
                     document.getElementById("pa-" + key).style.display = "none"
                 }
             }
         }
     }
-
 }
 
 if(window.location.href.includes("/feed")) {

@@ -104,9 +104,15 @@
         </div>
     </div>
     {{else}}
-    <div id="edit-profile-button">Edit Profile</div>
+    <a href='/onboarding'><div id="edit-profile-button">Edit Profile</div></a>
     {{/ifeq}}
 <div id="user">
 
 </div>
+<script>
+            var profile_data = "{{json profile_data}}"
+            profile_data = profile_data.replace(/&quot;/g, '\"');
+            console.log("PROFILE DATA:", profile_data)
+            profile_data = JSON.parse(profile_data);
+</script>
 {{> footer }}

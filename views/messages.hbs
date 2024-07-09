@@ -174,6 +174,39 @@
     } else {
         document.getElementById("no-message").style.display = "none"
     }
+
+var url = new URL(window.location.href);
+
+    setInterval(function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText)
+
+                  //update messages
+
+                  var ms = JSON.parse(this.responseText)
+
+                  var messages_body = document.getElementById("messages-body");
+                  messages_body.innerHTML = ""
+
+                  for(var i = 0; i < ms.length; i++) {
+                    var messageDiv = document.createElement("div")
+                    messageDiv.innerHTML = ms[i].content
+                    if(ms[i].mine == 1) {
+                        messageDiv.classList.add("my-message")
+                    } else {
+                        messageDiv.classList.add("their-message")
+                    }
+                    messages_body.appendChild(messageDiv)
+                  }
+
+
+                }
+            }
+            xhttp.open("GET", "/refresh-messages?uid=" + url.searchParams.get("uid"), true);
+            xhttp.send();
+    }, 1000)
 </script>
 
 {{> footer }}

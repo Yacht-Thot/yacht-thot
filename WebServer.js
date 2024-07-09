@@ -133,6 +133,23 @@ app.get('/support', async (req, res) => {
     )
 });
 
+app.get('/refresh-messages', async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    var messager_p_data = await User.getProfileData(req.query.uid)
+    console.log(messager_p_data)
+    message_to_username = messager_p_data.username
+    message_to_uid = messager_p_data.user_id;
+
+    var message_chain = await User.getMessageChain(user_data.user_id, req.query.uid)
+
+    res.send(message_chain)
+
+
+
+});
+
 app.get('/profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
