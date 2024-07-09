@@ -239,6 +239,11 @@ async function getUsernamesFromList(u_uid_list) {
 
         var username_list = []
         var addt = ""
+
+        if(u_uid_list.length == 0) {
+            resolve(-1)
+            return
+        }
         for(var i = 1; i < u_uid_list.length; i++) {
             addt = addt + " OR uid = " + u_uid_list[i];
         }
