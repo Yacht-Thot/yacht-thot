@@ -138,7 +138,7 @@ app.get('/refresh-messages', async (req, res) => {
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
     var messager_p_data = await User.getProfileData(req.query.uid)
-    console.log(messager_p_data)
+   // console.log(messager_p_data)
     message_to_username = messager_p_data.username
     message_to_uid = messager_p_data.user_id;
 

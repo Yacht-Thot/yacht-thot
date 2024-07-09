@@ -148,9 +148,12 @@ function showMessagesInterface() {
 
 if(document.getElementById("profile-image-edit")) {
     document.getElementById("profile-image-edit").onclick = function() {
-        console.log("edit");
-        
+        document.getElementById("profile-image-upload").click();
     }
+
+    document.getElementById("profile-image-upload").addEventListener('input', function (evt) {
+        console.log(this.value);
+    });
 }
 
 if(window.location.href.includes("profile")) {
