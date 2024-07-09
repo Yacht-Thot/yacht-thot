@@ -153,7 +153,36 @@ if(document.getElementById("profile-image-edit")) {
 
     document.getElementById("profile-image-upload").addEventListener('input', function (evt) {
         console.log(this.value);
+
+        //POST /upload-profile-image
     });
+
+    
+
+
+    var $uploadCrop, tempFilename, rawImg, imageId;
+    $uploadCrop = $('#upload-demo').croppie({
+    viewport: currentDimensions,
+    enforceBoundary: false,
+    enableExif: true
+});
+
+
+}
+
+function readFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('.upload-demo').addClass('ready');
+            $('#cropImagePop').modal('show');
+            rawImg = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+    else {
+        queueAdminMessage("Sorry - there seems to be a problem. Please reload.");
+    }
 }
 
 if(window.location.href.includes("profile")) {

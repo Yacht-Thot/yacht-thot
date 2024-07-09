@@ -124,7 +124,21 @@ function findZodiacSign(birthday) {
   }
 }
 
+function saveImageDataToFileSystemBuffer(buffer, imgID) {
+
+  var imgPath = path.join(__dirname, 'public/img/user-photos/')
+
+
+  fs.writeFile(imgPath + imgID + ".webp", buffer, {
+      flag: 'w',
+  }, function (err) {
+      if (err)
+          console.log("Image write error: " + err);
+  });
+}
+
 module.exports = {
+  saveImageDataToFileSystemBuffer,
   findZodiacSign,
   getAgeFromDOB,
   removeDuplicates,

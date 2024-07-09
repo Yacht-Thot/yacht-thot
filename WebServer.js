@@ -3,6 +3,8 @@ const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require("path");
+const multer = require('multer');
+const upload = multer();
 
 require('dotenv').config({ path: './app.env' })
 
@@ -75,6 +77,22 @@ app.set('view engine', 'hbs');
 app.listen(process.env.HTTP_PORT, () => 
     console.log(`Listening for HTTP on port ${process.env.HTTP_PORT}!`));
 
+
+app.post('/upload-profile-image/', upload.single("file"), (req, res) => {
+
+    (async function () {
+        user_id = await checkauth(req, res);
+        let user_data = await getUserData("email", user_id);
+
+            console.log("ID:", req.body)
+            Util.saveImageDataToFileSystemBuffer(req.file.buffer, "Instructor", req.body.instructorID);
+            
+            res.send("1")
+
+
+    })()
+
+});
 
 app.get('/logout', (req, res) => {
     res.cookie('uid', "", { maxAge: 0 });
