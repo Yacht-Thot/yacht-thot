@@ -1,4 +1,16 @@
-   <div id="footer">
+   {{#ifeq user_data -1}}
+    {{else}}
+    <div id="action-bar">
+      <div id="feed-ab" class="action-bar-item">
+        <i id="feed-ab-icon" class="fa-solid fa-magnifying-glass"></i>
+      </div><div id="profile-ab" class="action-bar-item">
+        <i id="profile-ab-icon" class="fa-solid fa-user"></i>
+      </div><div id="messages-ab" class="action-bar-item">
+        <i id="messages-ab-icon" class="fa-solid fa-message"></i>
+      </div>
+    </div>
+    {{/ifeq}}
+    <div id="footer">
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/privacy-policy">Privacy Policy</a>
    </div>
@@ -7,10 +19,6 @@
             user_data = user_data.replace(/&quot;/g, '\"');
             user_data = JSON.parse(user_data);
             console.log("User Data:", user_data)
-            if(user_data.username == null && !window.location.href.includes("/onboarding")) {
-               window.location.href = "/onboarding"
-              //console.log(window.location.href)
-            }
    </script>
    <script type="module" src='/js/core.js?v={{current_version}}'></script>
    <script src="https://accounts.google.com/gsi/client" async defer></script>

@@ -25,12 +25,12 @@
 }
 .captain-profile {
     position: relative;
-    padding-bottom: 50px;
+    padding-bottom: 75px;
 }
 .captain-profile-photo {
     aspect-ratio: 16 / 9;
     width: 100%;
-    background-image: url(/img/sample/boat.webp);
+    background-image: url(/img/no-image-captain.webp);
     background-size: cover;
     position: relative;
 }
@@ -39,11 +39,10 @@
     padding: 10px;
 }
 .captain-feed-username {
-    font-family: 'antipasto';
+    font-family: sans-serif;
     font-size: 3em;
     text-align: center;
     /* padding-top: 1em; */
-    padding-bottom: 10px;
 }
 
 .captain-feed-link {
@@ -61,42 +60,47 @@
     color: dimgray;
     font-family: sans-serif;
 }
-.profile-image-counter {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    background: rgba(0, 0, 0, .7);
-    font-family: sans-serif;
-    color: white;
-    border-radius: 10px;
-    font-size: .8em;
-    padding: 5px;
-    }
+
 </style>
 <div id="thot-feed">
     {{#each captains}}
-        <a class='captain-feed-link' href="/captain">
+        <a class='captain-feed-link' href="/profile?uid={{user_id}}">
         <div class="captain-profile">
             <div class="captain-profile-photo">
                 <div class="profile-image-counter">1/1</div>
             </div>
             <div class="captain-feed-info">
-                <div class="captain-feed-make-model">Schaefer 660</div>
-                <div class="captain-feed-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
+                <div class="captain-feed-make-model">{{boat_name}}</div>
+                <div class="captain-feed-location"><i class="fa-solid fa-location-dot"></i> {{location}}</div>
                 <div class="captain-feed-username">{{username}}</div>
                 <div class="captain-feed-ne"><i class="fa-solid fa-calendar-days"></i> Next Event: TBD</div>
             </div>
             <div class="captain-feed-specs">
-                <div class="captain-feed-spec">
-                    <i class="fa-solid fa-ruler"></i> Boat Length: 10ft
-                </div><div class="captain-feed-spec">
-                    <i class="fa-solid fa-users"></i> Boat Capacity: 5
-                </div><div class="captain-feed-spec">
-            <i class="fa-solid fa-toilet"></i> Bathrooms: 5
-        </div><div class="captain-feed-spec">
-            <i class="fa-solid fa-bed"></i> Bedrooms: 5
+             <div class="captain-feed-spec ctl">
+            <i class="fa-solid fa-ruler"></i> Length: {{boat_length}}ft
+        </div><div class="captain-feed-spec ctr">
+            <i class="fa-solid fa-users"></i> Capacity: {{boat_capacity}}
+        </div><div class="captain-feed-spec cbl">
+            <i class="fa-solid fa-sailboat"></i> {{boat_name}}
+        </div><div class="captain-feed-spec cbr">
+            <i class="fa-solid fa-calendar"></i> Year: {{boat_year}}
         </div>
             </div>
+        <div class="captain-profile-actions">
+             <a href="/messages?uid={{user_id}}">
+            <div class="captain-profile-message">
+                <i class="fa-solid fa-message"></i>
+            </div>
+            </a>
+            <a href="/profile?uid={{user_id}}">
+                <div class="captain-profile-goto">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </a>
+            <div class="captain-profile-like" onclick="likeProfile({{user_id}})">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+        </div>
         </div>
         </a>
     {{/each}}

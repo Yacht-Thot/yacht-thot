@@ -12,6 +12,8 @@ const googleOAuthClient = new OAuth2Client();
 const Util = require("./src/Util.js");
 const User = require("./src/User.js");
 
+require("./src/Daemons.js")
+
 function inLocalDevMode() {
     if(process.env.DEV === "LOCALHOST") {
         return true;
@@ -108,11 +110,17 @@ app.get('/profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
-    res.render('captain',
+    var profile_data = await User.getProfileData(req.query.uid)
+
+    var r_templ = profile_data.role.toLowerCase()
+
+    res.render(r_templ,
         {
-           title: "Yacht Thot - Username",
+           title: "Yacht Thot - " + user_data.username,
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           profile_data: profile_data,
+           show_action_bar: 1
         }
     )
 });
@@ -121,11 +129,34 @@ app.get('/messages', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
+    var message_to_username = ""
+    var message_to_uid = ""
+    var message_chain = null;
+    var message_users = -1
+
+    if(req.query.uid) {
+        var messager_p_data = await User.getProfileData(req.query.uid)
+        console.log(messager_p_data)
+        message_to_username = messager_p_data.username
+        message_to_uid = messager_p_data.user_id;
+    
+        var message_chain = await User.getMessageChain(user_data.user_id, req.query.uid)
+        console.log("Got message Chainnnn!", message_chain)
+    } else {
+        var message_users = await User.getMyMessageUsers(user_data.user_id)
+        if(message_users.length == 0) message_users = -1;
+        console.log("Got message users:", message_users)
+    }
+
     res.render('messages',
         {
            title: "Yacht Thot - Messages",
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           message_to_username: message_to_username,
+           message_to_id: message_to_uid,
+           message_users: message_users,
+           message_chain: message_chain
         }
     )
 });
@@ -134,64 +165,58 @@ app.get('/my-profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
-    res.render('captain',
+    var r_role = user_data.role.toLowerCase();
+
+    res.render(r_role,
         {
            title: "Yacht Thot - " + user_data.username,
            description: "",
-           user_data: user_data
+           user_data: user_data,
+           profile_data:user_data,
+           show_action_bar: 0
         }
     )
 });
 
-var sample_thots = [
-    {
-        username: "Alicia",
-        age: "19",
-        location: "Miami, FL",
-        tagline: "Staying bad and bouji",
-        photo_url: "/img/sample/alicia.jpg"
-    },
-    {
-        username: "Baily",
-        age: "22",
-        location: "Omaha, NA",
-        tagline: "A southern girl looking for boats",
-        photo_url: "/img/sample/baily.jpg"
-    },
-    {
-        username: "Jane",
-        age: "34",
-        location: "Jacksonville, FL",
-        tagline: "I promise not to weigh down your boat.",
-        photo_url: "/img/sample/veazy.jpg"
-    }
-]
 app.get('/feed', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
-    res.render('captain-feed',
+    
+
+    var r_t = 'captain-feed'
+    if(user_data.role == "THOT") {
+        var captains = await User.getFeedUsers("CAPTAIN")
+        r_t = "thot-feed"
+    } else {
+        var thots = await User.getFeedUsers("THOT")
+    }
+
+    res.render(r_t,
         {
            title: "Yacht Thot - Home",
            description: "",
-           thots: sample_thots,
+           thots: thots,
+           captains: captains,
            user_data: user_data
         }
     )
 });
 
-var sample_capns = [
-    {
-        username: "Nick"
-    },
-    {
-        username: "Jack"
-    },
-    {
-        username: "Dave"
-    }
+app.post('/submit-onboarding', async (req, res) => {
 
-]
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+    var payload = req.body;
+    console.log(payload)
+    User.submitOnboarding(user_data, payload, res)
+    
+});
+
+app.post("/send-private-message", async (req, res) => {
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    User.sendPrivateMessage(user_data, req.body.message_content, req.body.to_uid)
+  });
 
 app.get('/privacy-policy', async (req, res) => {
 

@@ -46,6 +46,7 @@ body {
     color: dodgerblue;
 }
 #thot-profile-holder {
+    padding-top: 50px;
     position: absolute;
     top: 0;
     left: 0;
@@ -53,12 +54,29 @@ body {
     bottom: 0;
 }
 #thot-profile-img-holder {
-    background: url(/img/sample/alicia.jpg);
+    background: url(/img/no-image-thot.webp);
     width: 100%;
     aspect-ratio: 1;
     background-position: center;
     background-size: cover;
+    position: relative;
 }
+#edit-profile-button {
+    background: dodgerblue;
+    color: white;
+    padding: 10px;
+}
+.profile-image-counter {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
+    }
 #main-content {
     width: 100vw;
     height: 100vh;
@@ -67,6 +85,36 @@ body {
 #main-content video {
     height: 100%;
     margin-left: -50%;
+}
+
+.boat-stats {
+    font-family: sans-serif;
+    padding-bottom: 25px;
+}
+.captain-feed-specs {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+.ctl {
+    border-top: 0px !important;
+    border-left: 0px !important;
+    padding-bottom: 5px;
+}
+.ctr {
+        border-top: 0px !important;
+        border-right: 0px !important;
+        padding-bottom: 5px;
+}
+.cbl {
+    border-bottom: 0px !important;
+    border-left: 0px !important;
+    padding-top: 5px;
+}
+.cbr {
+    border-bottom: 0px !important;
+    border-right: 0px !important;
+    padding-top: 5px;
 }
 
 #faqs {
@@ -177,6 +225,86 @@ body {
     margin-top: 0;
     margin-bottom: 0px;
 }
+.thot-profile-actions, .captain-profile-actions {
+    height: 100px;
+    position: relative;
+    background: white;
+    width: 100%;
+    margin-top: 20px;
+}
+.thot-profile-message, .captain-profile-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+    color: black;
+}
+.thot-profile-goto, .captain-profile-goto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% - 3em), -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+    color: black;
+}
+.thot-profile-like, .captain-profile-like {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% + 3em), -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+}
+
+#captain-profile-actions {
+    bottom: 50px;
+    height: 100px;
+    background: white;
+    width: 100%;
+    position: fixed;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+#captain-profile-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+}
+    #captain-profile-back {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% - 3em), -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+}
+    #captain-profile-like {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% + 3em), -50%);
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 2em;
+}
 
 #user-profile {
     left: 0;
@@ -184,18 +312,45 @@ body {
     height: fit-content;
     padding: 0;
     padding-top: 50px;
+    padding-bottom: 50px;
     width: 100vw;
     background: white;
     color: black;
 }
 
+.captain-feed-ne {
+    display: none;
+}
+
 #user-profile h1 {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 3em;
     font-weight: normal;
-    margin: 10px;
-    margin-top: 20px;
+    margin: 0;
     font-family: sans-serif;
+}
+
+#profile-image-counter {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
+    }
+#profile-image-edit {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
 }
 
 #profile-tagline {
@@ -206,12 +361,28 @@ body {
 }
 .amenity-checklist {
     font-size: 1.5em;
+    margin-top: 15px;
 }
-
+#action-bar {
+    position: fixed;
+    background: white;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    line-height: 65px;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+.action-bar-item {
+    width: 33%;
+    display: inline-block;
+    font-size: 2em;
+    padding-top: 8px;
+    text-align: center;
+}
 #profile-image-holder {
     aspect-ratio: 16 / 9;
     width: 100%;
-    background-image: url(/img/sample/boat.webp);
+    background-image: url(/img/no-image-captain.webp);
     background-size: cover;
     position: relative;
 }
@@ -314,7 +485,7 @@ body {
     width: 90%;
     margin: auto;
     padding-top: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 125px;
   }
 
   #profile-events {
