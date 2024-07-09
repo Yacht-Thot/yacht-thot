@@ -6,12 +6,15 @@
     #captain-feed {
         font-family: sans-serif;
         padding-top: 50px;
+        padding-bottom: 50px;
     }
     .thot-feed-img {
-    background: url(/img/sample/alicia.jpg);
+    background: url(/img/no-image-thot.webp);
     width: 100%;
     aspect-ratio: 9 / 16;
     background-size: cover;
+    background-position: center;
+    position: relative;
     }
     .thot-profile-link {
         text-decoration: none;
@@ -36,50 +39,15 @@
     .thot-feed-item {
          position: relative;
     }
-    .thot-profile-actions {
-        height: 100px;
-        position: relative;
-        background: white;
-        width: 100%;
-        margin-top: 20px;
-    }
-    .thot-profile-message {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border: 1px solid gray;
-        border-radius: 50%;
-        padding: 20px;
-        font-size: 2em;
-    }
-    .thot-profile-goto {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(calc(-50% - 3em), -50%);
-        border: 1px solid gray;
-        border-radius: 50%;
-        padding: 20px;
-        font-size: 2em;
-    }
-    .thot-profile-like {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(calc(-50% + 3em), -50%);
-        border: 1px solid gray;
-        border-radius: 50%;
-        padding: 20px;
-        font-size: 2em;
-    }
+
 </style>
 <div id="captain-feed">
     {{#each thots}}
     
     <div class="thot-feed-item">
-        <a class='thot-profile-link' href="/thot">
+        <a class='thot-profile-link' href="/profile?uid={{user_id}}">
         <div class="thot-feed-img">
+            <div class="profile-image-counter">1/1</div>
         </div>
         </a>
         <div class="thot-feed-username">
@@ -96,13 +64,17 @@
         </div>
 
         <div class="thot-profile-actions">
-            <div class="thot-profile-message">
-                <i class="fa-solid fa-message"></i>
-            </div>
-            <div class="thot-profile-goto">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="thot-profile-like">
+            <a href="/messages?uid={{user_id}}">
+                <div class="thot-profile-message">
+                    <i class="fa-solid fa-message"></i>
+                </div>
+            </a>
+            <a href="/profile?uid={{user_id}}">
+                <div class="thot-profile-goto">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </a>
+            <div class="thot-profile-like" onclick="likeProfile({{user_id}})">
                 <i class="fa-regular fa-heart"></i>
             </div>
         </div>

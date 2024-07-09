@@ -20,10 +20,10 @@
     }
     #thot-profile-info {
         padding: 10px;
-        padding-bottom: 110px;
+        padding-bottom: 160px;
     }
     #thot-profile-actions {
-        bottom: 0;
+        bottom: 50px;
         height: 100px;
         background: white;
         width: 100%;
@@ -64,26 +64,36 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     }
 </style>
 <div id="thot-profile-holder">
-    <div id="thot-profile-img-holder"></div>
+    <div id="thot-profile-img-holder">
+        <div id="profile-image-counter">1/1</div>
+        {{#ifeq show_action_bar 1}}
+        {{else}}
+        <div id="profile-image-edit"><i class="fa-solid fa-pencil"></i></div>
+        {{/ifeq}}
+    </div>
     <div id="thot-profile-info">
-        <div id="thot-username">Alicia</div>
-        <div id="thot-location"><i class="fa-solid fa-location-dot"></i> Miami, FL</div>
+        <div id="thot-username">{{profile_data.username}}</div>
+        <div id="thot-location"><i class="fa-solid fa-location-dot"></i> {{profile_data.location}}</div>
         <div id="thot-sign">♑ Capricorn</div>
-        <div id="thot-tagline">Down in Miami for Spring Break.</div>
+        <div id="thot-tagline">{{profile_data.tagline}}</div>
                 <div id="thot-age">25</div>
         
-        <div id="thot-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo</div>
+        <div id="thot-bio">{{profile_data.bio}}</div>
     </div>
+    {{#ifeq show_action_bar 1}}
     <div id="thot-profile-actions">
+        <a style="color:black" href="/messages?uid={{profile_data.user_id}}">
         <div id="thot-profile-message">
             <i class="fa-solid fa-message"></i>
         </div>
+        </a>
         <div id="thot-profile-back">
             <i class="fa-solid fa-arrow-left-long"></i>
         </div>
-        <div id="thot-profile-like">
+        <div id="thot-profile-like" onclick="likeProfile({{profile_data.user_id}})">
             <i id="thot-profile-like-icon" class="fa-regular fa-heart"></i>
         </div>
     </div>
+    {{/ifeq}}
 </div>
 {{> footer }}

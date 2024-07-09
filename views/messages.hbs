@@ -3,6 +3,177 @@
     #main-content {
         display: none;
     }
+    #messages-header {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        height: 100px;
+    }
+
+    #messages-header-picture {
+        background-image: url(/img/no-image-thot.webp);
+        height: 100px;
+        width: 100px;
+    background-size: cover;
+    float: left;
+    background-position: center;
+    }
+
+    #messages-header-name {
+        font-size: 2em;
+        height: 100px;
+        width: calc(100% - 100px);
+        float: right;
+        text-align: center;
+    line-height: 100px;
+    background: aliceblue;
+    font-family: sans-serif;
+    color: black;
+    }
+
+    #messages-input {
+        position: fixed;
+    bottom: 50px;
+    width: 100%;
+    }
+
+#messages-textbox {
+    height: 100px;
+    width: 100%;
+    border: 0;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    outline: 0;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+#messages-body {
+    position: fixed;
+    top: 150px;
+    bottom: 150px;
+    width: 100%;
+    padding-bottom: 25px;
+    overflow: scroll;
+    
+}
+
+.my-message, .their-message {
+    background: gainsboro;
+    border-radius: 10px;
+    font-family: sans-serif;
+    margin-top: 10px;
+    width: fit-content;
+    max-width: 80%;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.their-message {
+    margin-right: 10px;
+    margin-left: auto;
+    background: dodgerblue;
+    color: white;
+}
+
+#no-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* font-family: sans-serif; */
+    font-size: 2em;
+    color: gray;
+}
+    #messages-holder {
+        padding-top: 50px;
+    }
+    .message-user {
+        width: 100%;
+        height: 100px;
+        background: lightblue;
+        font-family: sans-serif;
+    }
+
+    .messages-user-picture {
+        background-image: url(/img/sample/alicia.jpg);
+        height: 100px;
+        width: 100px;
+        background-size: cover;
+        float: left;
+        background-position: center;
+    }
+    .messages-user-username {
+        font-size: 2em;
+        height: 100px;
+        width: calc(100% - 100px);
+        float: right;
+        text-align: center;
+        line-height: 100px;
+        background: aliceblue;
+        font-family: sans-serif;
+        color: black;
+    }
 </style>
+
+<div id="messages-holder">
+    {{#ifeq message_users -1}}
+        <div id="no-message">
+            No messages..
+        </div>
+    {{else}}
+        {{#each message_users}}
+            <a href="/messages?uid={{user_id}}">
+                <div class="message-user">
+                    <div class="messages-user-picture"></div>
+                    <div class="messages-user-username">{{username}}</div>
+                </div>
+            </a>
+        {{/each}}
+    {{/ifeq}}
+</div>
+
+<a href="/messages">
+    <div id="messages-header">
+        <div id="messages-header-picture"></div>
+        <div id="messages-header-name">{{message_to_username}}</div>
+    </div>
+</a>
+
+<div id="messages-body">
+    {{#each message_chain}}
+    {{#ifeq mine 1}}
+        <div class="my-message">{{content}}</div>
+        {{else}}
+        <div class="their-message">{{content}}</div>
+        {{/ifeq}}
+    {{/each}}
+    <!--<div class="my-message">This is a sample message for me.</div>
+    <div class="their-message">This is a sample message for them.</div>-->
+</div>
+
+<div id="messages-input">
+    <textarea id="messages-textbox" data-uid="{{message_to_id}}" placeholder="Enter a message here." onkeypress="checkMessage(event)"></textarea>
+</div>
+
+<script>
+    function isNotHome() {
+        var field = 'uid';
+        var url = window.location.href;
+        if(url.indexOf('?' + field + '=') != -1)
+            return true;
+        else if(url.indexOf('&' + field + '=') != -1)
+            return true;
+        return false
+    }
+
+    if(!isNotHome()) {
+        document.getElementById("messages-input").style.display = "none";
+        document.getElementById("messages-body").style.display = "none"
+        document.getElementById("messages-header").style.display = "none"
+    } else {
+        document.getElementById("no-message").style.display = "none"
+    }
+</script>
 
 {{> footer }}

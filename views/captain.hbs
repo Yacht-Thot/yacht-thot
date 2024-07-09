@@ -13,49 +13,43 @@
     #profile-info-header {
         position: relative;
     }
-    #profile-image-counter {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    background: rgba(0, 0, 0, .7);
-    font-family: sans-serif;
-    color: white;
-    border-radius: 10px;
-    font-size: .8em;
-    padding: 5px;
-    }
+ 
 
 </style>
 <div id ="user-profile">
 <div id="profile-image-holder">
     <div id="profile-image-counter">1/1</div>
+            {{#ifeq show_action_bar 1}}
+        {{else}}
+        <div id="profile-image-edit"><i class="fa-solid fa-pencil"></i></div>
+        {{/ifeq}}
 </div>
 <div id="profile-info-header">
-    <div id="profile-location"><i class="fa-solid fa-location-dot"></i> {{user_data.location}}</div>
+    <div id="profile-location"><i class="fa-solid fa-location-dot"></i> {{profile_data.location}}</div>
     <div id="profile-make-model"></div>
-    <h1 id="profile-username">{{user_data.username}}</h1>
+    <h1 id="profile-username">{{profile_data.username}}</h1>
     <div style="padding:20px">
     <div class="captain-feed-specs">
         <div class="captain-feed-spec ctl">
-            <i class="fa-solid fa-ruler"></i> Length: {{user_data.boat_length}}ft
+            <i class="fa-solid fa-ruler"></i> Length: {{profile_data.boat_length}}ft
         </div><div class="captain-feed-spec ctr">
-            <i class="fa-solid fa-users"></i> Capacity: {{user_data.boat_capacity}}
+            <i class="fa-solid fa-users"></i> Capacity: {{profile_data.boat_capacity}}
         </div><div class="captain-feed-spec cbl">
-            <i class="fa-solid fa-sailboat"></i> {{user_data.boat_name}}
+            <i class="fa-solid fa-sailboat"></i> {{profile_data.boat_name}}
         </div><div class="captain-feed-spec cbr">
-            <i class="fa-solid fa-calendar"></i> Year: {{user_data.boat_year}}
+            <i class="fa-solid fa-calendar"></i> Year: {{profile_data.boat_year}}
         </div>
     </div>
     </div>
-    <div id="profile-tagline">{{user_data.tagline}}</div>
-    <div id="profile-bio">{{user_data.bio}}</div>
+    <div id="profile-tagline">{{profile_data.tagline}}</div>
+    <div id="profile-bio">{{profile_data.bio}}</div>
 </div>
 <div id="profile-features">
     <h2>Amenities</h2>
     <div class="boat-stats">
-        <i class="fa-solid fa-toilet"></i> Bathrooms: {{user_data.boat_bathrooms}}<br>
-        <i class="fa-solid fa-bed"></i> Bedrooms: {{user_data.boat_bedrooms}}<br>
-        <i class="fa-solid fa-ruler-combined"></i> Floors: {{user_data.boat_floors}}
+        <i class="fa-solid fa-toilet"></i> Bathrooms: {{profile_data.boat_bathrooms}}<br>
+        <i class="fa-solid fa-bed"></i> Bedrooms: {{profile_data.boat_bedrooms}}<br>
+        <i class="fa-solid fa-ruler-combined"></i> Floors: {{profile_data.boat_floors}}
     </div>
    
     <div id="pa-bimini_top" class="amenity-checklist"><i class="fa-solid fa-square-check"></i> Bimini Top/Shade</div>
@@ -93,6 +87,25 @@
 </div>
 -->
 </div>
+    {{#ifeq show_action_bar 1}}
+    <div id="captain-profile-actions">
+        <a style="color:black" href="/messages?uid={{profile_data.user_id}}">
+            <div id="captain-profile-message">
+                <i class="fa-solid fa-message"></i>
+            </div>
+        </a>
+        <a style="color:black" href="/feed">
+            <div id="captain-profile-back">
+                <i class="fa-solid fa-arrow-left-long"></i>
+            </div>
+        </a>
+        <div id="captain-profile-like" onclick="likeProfile({{profile_data.user_id}})">
+            <i id="captain-profile-like-icon" class="fa-regular fa-heart"></i>
+        </div>
+    </div>
+    {{else}}
+    <div id="edit-profile-button">Edit Profile</div>
+    {{/ifeq}}
 <div id="user">
 
 </div>
