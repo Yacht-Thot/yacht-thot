@@ -137,6 +137,11 @@ app.get('/profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
+    if(user_data == -1) {
+        res.redirect("/")
+        return
+    }
+    
     var profile_data = await User.getProfileData(req.query.uid)
 
     var r_templ = profile_data.role.toLowerCase()
@@ -156,6 +161,11 @@ app.get('/profile', async (req, res) => {
 app.get('/messages', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    if(user_data == -1) {
+        res.redirect("/")
+        return
+    }
 
     var message_to_username = ""
     var message_to_uid = ""
@@ -194,6 +204,11 @@ app.get('/my-profile', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
+    if(user_data == -1) {
+        res.redirect("/")
+        return
+    }
+
     var r_role = user_data.role.toLowerCase();
 
     res.render(r_role,
@@ -212,7 +227,10 @@ app.get('/feed', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
-    
+    if(user_data == -1) {
+        res.redirect("/")
+        return;
+    }
 
     var r_t = 'captain-feed'
     if(user_data.role == "THOT") {
@@ -308,6 +326,11 @@ app.get('/about', async (req, res) => {
 app.get('/onboarding', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+
+    if(user_data == -1) {
+        res.redirect("/")
+        return
+    }
 
     res.render('onboarding',
         {
