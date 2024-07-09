@@ -245,7 +245,7 @@ async function getUsernamesFromList(u_uid_list) {
             return
         }
         for(var i = 1; i < u_uid_list.length; i++) {
-            addt = addt + " OR uid = " + u_uid_list[i];
+            addt = addt + " OR user_id = " + u_uid_list[i];
         }
         var q = "SELECT user_id, username FROM users WHERE user_id = " + u_uid_list[0] + addt;
         console.log("USER MESSAGE LIST Q:", q)
