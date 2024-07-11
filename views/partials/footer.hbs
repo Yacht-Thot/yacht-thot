@@ -21,10 +21,14 @@
             console.log("User Data:", user_data)
 
             if(user_data.username == null) {
-              document.getElementById("action-bar").style.display = "none"
+              if(document.getElementById("action-bar"))
+                document.getElementById("action-bar").style.display = "none"
             }
    </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
    <script type="module" src='/js/core.js?v={{current_version}}'></script>
+    <script src='/public-js/croppie.min.js'></script>
+
    <script src="https://accounts.google.com/gsi/client" async defer></script>
     </body>
 </html>

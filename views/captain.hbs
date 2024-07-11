@@ -19,7 +19,7 @@
 <input type="file" id="profile-image-upload" style="display:none"/> 
 <div id ="user-profile">
 <div id="profile-image-holder">
-    <div id="profile-image-counter">1/1</div>
+    <div id="profile-image-counter">{{#ifeq profile_data.image_count 0}}0{{else}}1{{/ifeq}}/{{profile_data.image_count}}</div>
             {{#ifeq show_action_bar 1}}
         {{else}}
         <div id="profile-image-edit"><i class="fa-solid fa-pencil"></i></div>

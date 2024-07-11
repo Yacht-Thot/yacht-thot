@@ -159,6 +159,14 @@ if(document.getElementById("profile-image-edit")) {
 
     
 
+    var thotDimensions = {
+        width: 540, height: 720
+    }
+    var captainDimensions = {
+        width: 900, height: 450
+    }
+
+    var currentDimensions = captainDimensions;
 
     var $uploadCrop, tempFilename, rawImg, imageId;
     $uploadCrop = $('#upload-demo').croppie({

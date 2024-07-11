@@ -198,7 +198,7 @@ body {
     position: fixed;
     width: 100%;
     top: 50px;
-    transition: transform 1s;
+    transition: transform .5s;
     transform: translateY(calc(-100% - 50px));
 }
 .mobile-menu-active {
