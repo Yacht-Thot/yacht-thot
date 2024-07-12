@@ -297,8 +297,8 @@ async function getMyMessagePreviews(user_id) {
                         for(var j = 0; j < messages.length; j++) {
                             if(messages[j].to_uid == message_user_list[i].user_id || messages[j].from_uid == message_user_list[i].user_id) {
                                 message_user_list[i].content = messages[j].content
-                                if(message_user_list[i].content.length > 20) {
-                                    message_user_list[i].content = message_user_list[i].content.substring(0, 20)  + "..."
+                                if(message_user_list[i].content.length > 30) {
+                                    message_user_list[i].content = message_user_list[i].content.substring(0, 30)  + "..."
                                 }
                                  message_user_list[i].timestamp = messages[j].timestamp
                             }
