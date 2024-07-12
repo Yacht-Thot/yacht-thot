@@ -93,6 +93,7 @@
         height: 100px;
         background: lightblue;
         font-family: sans-serif;
+        position: relative;
     }
 
     .messages-user-picture {
@@ -104,15 +105,30 @@
         background-position: center;
     }
     .messages-user-username {
-        font-size: 2em;
-        height: 100px;
-        width: calc(100% - 100px);
-        float: right;
-        text-align: center;
-        line-height: 100px;
-        background: aliceblue;
-        font-family: sans-serif;
-        color: black;
+font-size: 2em;
+    height: 100px;
+    width: calc(100% - 100px);
+    float: right;
+    text-align: left;
+    text-indent: 10px;
+    line-height: 80px;
+    background: aliceblue;
+    font-family: sans-serif;
+    color: black;
+    }
+
+    .messages-user-preview {
+        position: absolute;
+        bottom: 5px;
+        left: 105px;
+        color: gray;
+    }
+
+    .messages-user-time-ago {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: gray;
     }
 </style>
 
@@ -127,6 +143,8 @@
                 <div class="message-user">
                     <div class="messages-user-picture"></div>
                     <div class="messages-user-username">{{username}}</div>
+                    <div class="messages-user-preview">{{content}}</div>
+                    <div class="messages-user-time-ago">{{timestamp}}</div>
                 </div>
             </a>
         {{/each}}

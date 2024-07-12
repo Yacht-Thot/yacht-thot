@@ -210,7 +210,7 @@ app.get('/messages', async (req, res) => {
     var message_to_username = ""
     var message_to_uid = ""
     var message_chain = null;
-    var message_users = -1
+    var message_previews = -1
 
     if(req.query.uid) {
         var messager_p_data = await User.getProfileData(req.query.uid)
@@ -221,9 +221,10 @@ app.get('/messages', async (req, res) => {
         var message_chain = await User.getMessageChain(user_data.user_id, req.query.uid)
         console.log("Got message Chainnnn!", message_chain)
     } else {
-        var message_users = await User.getMyMessageUsers(user_data.user_id)
-        if(message_users.length == 0) message_users = -1;
-        console.log("Got message users:", message_users)
+        var message_previews = await User.getMyMessagePreviews(user_data.user_id)
+        console.log(message_previews)
+        if(message_previews.length == 0) message_previews = -1;
+        console.log("Got message users:", message_previews)
     }
 
     res.render('messages',
@@ -233,7 +234,7 @@ app.get('/messages', async (req, res) => {
            user_data: user_data,
            message_to_username: message_to_username,
            message_to_id: message_to_uid,
-           message_users: message_users,
+           message_users: message_previews,
            message_chain: message_chain,
            current_version: current_version
         }

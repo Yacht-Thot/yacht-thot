@@ -271,7 +271,7 @@ async function getUsernamesFromList(u_uid_list) {
     })
 }
 
-async function getMyMessageUsers(user_id) {
+async function getMyMessagePreviews(user_id) {
     return new Promise(resolve => {
         var q = "SELECT * FROM messages WHERE from_uid = ? OR to_uid = ?"; //We can sort by timestamp with this query
         DB.con.query(q, [user_id, user_id], (error, messages) => {
@@ -292,6 +292,15 @@ async function getMyMessageUsers(user_id) {
 
                 (async function() {
                     var message_user_list = await getUsernamesFromList(u_uid_list)
+
+                    for(var i = 0; i < message_user_list.length; i++) {
+                        for(var j = 0; j < messages.length; j++) {
+                            if(messages[j].to_uid == message_user_list[i].user_id || messages[j].from_uid == message_user_list[i].user_id) {
+                                message_user_list[i].content = messages[j].content
+                                message_user_list[i].timestamp = messages[j].timestamp
+                            }
+                        }
+                    }
                     resolve(message_user_list)
                 })()
             }
@@ -312,7 +321,7 @@ function ping() {
 
 module.exports = {
     ping,
-    getMyMessageUsers,
+    getMyMessagePreviews,
     getMessageChain,
     sendPrivateMessage,
     getProfileData,
