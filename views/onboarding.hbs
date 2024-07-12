@@ -14,6 +14,7 @@
     border-radius: 10px;
     text-align: center;
     color-scheme: dark;
+    width: 100%;
     }
 
     #captain-onboarding-year {
@@ -42,36 +43,36 @@
             </div>
             <div id="step2-CAPTAIN">
                 <h2>Enter a Username</h2>
-                 <input id="captain-username" placeholder="Username.."/>
+                 <input id="captain-username" placeholder="Username.." value="{{user_data.username}}"/>
                 <h2>Enter Location</h2>
-                <input id="captain-location" placeholder="Boca Raton, FL"/>
+                <input id="captain-location" placeholder="Boca Raton, FL" value="{{user_data.location}}"/>
                 <h2>Enter Boat</h2>
-                <input id="captain-boat-name" placeholder="Make/Model"/>
+                <input id="captain-boat-name" placeholder="Make/Model"/ value="{{user_data.boat_name}}">
                 <h2>Enter a Tagline</h2>
-                <textarea id="captain-tagline" maxlength="20"></textarea>
+                <textarea id="captain-tagline" maxlength="20">{{user_data.tagline}}</textarea>
                 <h2>Enter a Bio</h2>
-                <textarea id="captain-bio"></textarea>
-                <div id="onboarding-captain-next" class="onboarding-button">Next</div>
+                <textarea id="captain-bio">{{user_data.bio}}</textarea>
+                <div id="onboarding-captain-back" class="onboarding-button">Back</div><div id="onboarding-captain-next" class="onboarding-button">Next</div>
             </div>
             <div id="step3-CAPTAIN">
                     <div class="captain-feed-specs onboarding-feed-specs">
                         <div class="captain-feed-spec ctl">
-                            <i class="fa-solid fa-sailboat"></i> <span id="captain-prep-boat-name"></span>
+                            <i class="fa-solid fa-sailboat"></i> <span id="captain-prep-boat-name">{{user_data.boat_name}}</span>
                         </div><div class="captain-feed-spec ctr">
-                             <i class="fa-solid fa-calendar"></i> Year: <input id='captain-onboarding-year' placeholder="2020"/>
+                             <i class="fa-solid fa-calendar"></i> Year: <input id='captain-onboarding-year' value="{{user_data.boat_year}}" placeholder="2020"/>
                         </div><div class="captain-feed-spec cbl">
-                            <i class="fa-solid fa-ruler"></i> Length: <input id='captain-onboarding-length' placeholder="10"/>
+                            <i class="fa-solid fa-ruler"></i> Length: <input id='captain-onboarding-length' value="{{user_data.boat_length}}"placeholder="10"/>
                         </div><div class="captain-feed-spec cbr">
-                           <i class="fa-solid fa-users"></i> Capacity: <input id='captain-onboarding-capacity' placeholder="5"/>
+                           <i class="fa-solid fa-users"></i> Capacity: <input id='captain-onboarding-capacity' value="{{user_data.boat_capacity}}" placeholder="5"/>
                         </div>
                     </div>
                 <h2>Bathrooms</h2>
-                    <input id="captain-boat-bathrooms" type="number" placeholder="#"/>
+                    <input id="captain-boat-bathrooms" type="number" placeholder="#" value="{{user_data.boat_bathrooms}}"/>
                 <h2>Bedrooms</h2>
-                    <input id="captain-boat-bedrooms" type="number" placeholder="#"/>
+                    <input id="captain-boat-bedrooms" type="number" placeholder="#" value="{{user_data.boat_bedrooms}}"/>
                 <h2>Floors</h2>
-                    <input id="captain-boat-floors" type="number" placeholder="#"/>
-                <div id="onboarding-captain-next-2" class="onboarding-button">Next</div>
+                    <input id="captain-boat-floors" type="number" placeholder="#"/ value="{{user_data.boat_floors}}">
+                <div id="onboarding-captain-back-2" class="onboarding-button">Back</div><div id="onboarding-captain-next-2" class="onboarding-button">Next</div>
             </div>
             <div id="step4-CAPTAIN">
                 <h2>Select Your Anemities</h2>
@@ -86,20 +87,20 @@
                     <div id="terrace" class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Fold-out Terrace</div>
                     <div id="hot_tub" class="amenity-checklist"><i class="fa-regular fa-square-check"></i> Hot Tub</div>
                     </div>
-                <div id="onboarding-captain-submit" class="onboarding-button">Get Started</div>
+                <div id="onboarding-captain-back-3" class="onboarding-button">Back</div><div id="onboarding-captain-submit" class="onboarding-button">Submit</div>
             </div>
             <div id="step2-THOT">
                 <h2>Enter a Username</h2>
-                <input id='thot-username' placeholder="Username.."/>
+                <input id='thot-username' placeholder="Username.." value="{{user_data.username}}"/>
                 <h2>Enter Location</h2>
-                <input id='thot-location' placeholder="Miami, FL"/>
+                <input id='thot-location' placeholder="Miami, FL" value="{{user_data.location}}"/>
                 <h2>Enter Birthday</h2>
-                <input id="thot-birthday" type="date"/>
+                <input id="thot-birthday" type="date" value="{{user_data.birthday_formatted}}"/>
                 <h2>Enter a Tagline</h2>
-                <textarea id="thot-tagline" maxlength="20"></textarea>
+                <textarea id="thot-tagline" maxlength="20">{{user_data.tagline}}</textarea>
                 <h2>Enter a Bio</h2>
-                <textarea id="thot-bio"></textarea>
-                <div id="onboarding-submit-thot" class="onboarding-button">Get Started</div>
+                <textarea id="thot-bio">{{user_data.bio}}</textarea>
+                <div id="onboarding-back-thot" class="onboarding-button">Back</div><div id="onboarding-submit-thot" class="onboarding-button">Submit</div>
             </div>
         </div>
 
@@ -150,31 +151,54 @@ var amenities = {
         role = "THOT"
         showStep(2)
     }
+    document.getElementById("onboarding-back-thot").onclick = function() {
+        showStep(1)
+    }
 
+        document.getElementById("onboarding-captain-back").onclick = function() {
+        showStep(1)
+    }
+
+    document.getElementById("onboarding-captain-back-2").onclick = function() {
+        showStep(2)
+    }
+
+    document.getElementById("onboarding-captain-back-3").onclick = function() {
+        showStep(3)
+    }
     function showStep(step) {
+        console.log("Showing Step " + step + " FOR " + role)
     switch(step) {
         case 1:
-            document.getElementById("step2-1").style.opacity = "0"
-            document.getElementById("step2-2").style.opacity = "0"
+            
+            document.getElementById("step2-" + role).style.opacity = "0"
             setTimeout(function() {
-                document.getElementById("step2-1").style.opacity = "1"
-                document.getElementById("step2-2").style.opacity = "1"
+                 document.getElementById("step2-" + role).style.display = "none"
+                document.getElementById("step1-1").style.display = "inherit"
+                document.getElementById("step1-1").style.opacity = "1"
                 }, 1000)
         break;
         case 2:
             document.getElementById("step1-1").style.opacity = "0"
+
+            if(role == "CAPTAIN")
+                document.getElementById("step3-" + role).style.opacity = "0"
             
             setTimeout(function() {
-            document.getElementById("step1-1").style.display = "none"
-            document.getElementById("step2-" + role).style.display = "block"
-            document.getElementById("step2-" + role).style.opacity = "1"
+                if(role == "CAPTAIN")
+                    document.getElementById("step3-" + role).style.display = "none"
+                document.getElementById("step1-1").style.display = "none"
+                document.getElementById("step2-" + role).style.display = "block"
+                document.getElementById("step2-" + role).style.opacity = "1"
             
             }, 1000)
         break;
         case 3:
             document.getElementById("step2-" + role).style.opacity = "0"
-            
+                        
+            document.getElementById("step4-" + role).style.opacity = "0"
             setTimeout(function() {
+                document.getElementById("step4-" + role).style.display = "none"
              document.getElementById("step2-" + role).style.display = "none"
             document.getElementById("step3-" + role).style.display = "block"
             document.getElementById("step3-" + role).style.opacity = "1"

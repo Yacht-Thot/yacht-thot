@@ -455,6 +455,13 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     cursor: pointer;
 }
 
+#onboarding-back-thot, #onboarding-submit-thot, #onboarding-captain-next, #onboarding-captain-back, #onboarding-captain-back-2, #onboarding-captain-next-2, #onboarding-captain-submit, #onboarding-captain-back-3 {
+    width: calc(50% - 40px);
+    display: inline-block;
+    padding: 10px;
+    margin-left: 5px;
+}
+
 .g_id_signin {
     text-align: center;
     width: fit-content;

@@ -370,6 +370,24 @@ app.get('/onboarding', async (req, res) => {
 
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
+    var bd_formatted = user_data.birthday;
+
+    bd_formatted = bd_formatted.split(" ")[0]
+
+    /**
+
+    var dparts = bd_formatted.split("-")
+
+    var y = dparts[0]
+    var m = dparts[1]
+    var d = dparts[2]
+
+    bd_formatted = m + "/" + d + "/" + y
+**/
+    console.log("BDF", bd_formatted)
+
+    user_data.birthday_formatted = bd_formatted
+
     if(user_data == -1) {
         res.redirect("/")
         return
