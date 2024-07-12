@@ -300,7 +300,10 @@ async function getMyMessagePreviews(user_id) {
                                 if(message_user_list[i].content.length > 30) {
                                     message_user_list[i].content = message_user_list[i].content.substring(0, 30)  + "..."
                                 }
-                                 message_user_list[i].timestamp = messages[j].timestamp
+
+                                var local_date= moment.utc(messages[j].timestamp).local().format('YYYY-MM-DD hh:mm A');
+                                 message_user_list[i].timestamp = local_date
+                                 
                             }
                         }
                     }
