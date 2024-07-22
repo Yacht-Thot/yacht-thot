@@ -18,6 +18,9 @@ async function getUserData(user_id, key) {
                 console.log(error)
                 resolve(-1);
             }
+            if(result == null) {
+                resolve(-1)
+            }
             if(result.length == 0) {
                 resolve(-1)
             }
@@ -253,7 +256,7 @@ async function getUsernamesFromList(u_uid_list) {
         for(var i = 1; i < u_uid_list.length; i++) {
             addt = addt + " OR user_id = " + u_uid_list[i];
         }
-        var q = "SELECT user_id, username FROM users WHERE user_id = " + u_uid_list[0] + addt;
+        var q = "SELECT user_id, username, profile_img_idx FROM users WHERE user_id = " + u_uid_list[0] + addt;
        // console.log("USER MESSAGE LIST Q:", q)
         DB.con.query(q, (error, users) => {
             if (error) {
@@ -262,7 +265,8 @@ async function getUsernamesFromList(u_uid_list) {
                 for(var i = 0; i < users.length; i++) {
                     username_list.push( {
                         user_id: users[i].user_id,
-                        username: users[i].username
+                        username: users[i].username,
+                        profile_img_idx: users[i].profile_img_idx
                     })
                 }
                 resolve(username_list)
@@ -325,7 +329,88 @@ function ping() {
     });
 }
 
+function incrementImageCount(user_id) {
+    var q = "UPDATE users set image_count = image_count + 1 WHERE user_id = ?";
+    DB.con.query(q, [user_id],(error, messages) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log("Update Image Count")
+        }
+    });
+}
+
+async function decrementImageCount(user_id) {
+    return new Promise(resolve => {
+    var q = "UPDATE users set image_count = image_count - 1 WHERE user_id = ?";
+    DB.con.query(q, [user_id],(error, messages) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log("Update Image Count")
+            resolve()
+        }
+    });
+});
+}
+
+async function setProfileImgIdx(user_data, idx) {
+    return new Promise(resolve => {
+        var q = "UPDATE users set profile_img_idx = ? WHERE user_id = ?";
+        DB.con.query(q, [idx, user_data.user_id],(error, messages) => {
+            if (error) {
+                console.log(error)
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
+async function deleteProfileImg(user_data, idx) {
+
+
+    if(user_data.image_count == 1) {
+        //we're going back to no profile picture.
+        await setProfileImgIdx(user_data, -1) 
+    } else {
+        //we just stick with the current index.
+    }
+
+    await decrementImageCount(user_data.user_id)
+
+    return new Promise(resolve => {
+    var photo_name = user_data.user_id + "_" + idx;
+    console.log("Deleting profile img:", photo_name)
+
+    Util.deleteImage(photo_name)
+
+    if(user_data.image_count == 1) {
+        //we're going back to no profile picture.
+        
+        resolve();
+    } else {
+        //we need to rename all of the other photos this user still has.
+       for(var i = 0; i < user_data.image_count; i++) {
+        if(i > idx) {
+            console.log("Renaming image" + i + " to " + (i-1))
+
+            var t_photo_name = user_data.user_id + "_" + i
+            var nt_photo_name =  user_data.user_id + "_" + (i - 1)
+            Util.renamePhoto(t_photo_name, nt_photo_name)
+        }
+       }
+
+        resolve()
+    }
+
+});
+}
+
 module.exports = {
+    deleteProfileImg,
+    setProfileImgIdx,
+    incrementImageCount,
     ping,
     getMyMessagePreviews,
     getMessageChain,

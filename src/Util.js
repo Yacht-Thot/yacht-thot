@@ -3,6 +3,8 @@ const { con } = require('./DB');
 const fs = require('fs').promises;
 const moment = require('moment-timezone');
 const readline = require('readline');
+const path = require('path')
+const webp=require('webp-converter');
 
 function askQuestion(query) {
     const rl = readline.createInterface({
@@ -124,20 +126,43 @@ function findZodiacSign(birthday) {
   }
 }
 
-function saveImageDataToFileSystemBuffer(buffer, imgID) {
+function saveImageDataToFileSystemBuffer(buffer, img_name) {
 
-  var imgPath = path.join(__dirname, 'public/img/user-photos/')
+  var imgPath = path.join(__dirname, '../public/img/user-photos/')
 
-
-  fs.writeFile(imgPath + imgID + ".webp", buffer, {
-      flag: 'w',
+  fs.writeFile(imgPath + img_name + ".jpg", buffer, { //.webp for later optimization.. need to crop etc.
   }, function (err) {
       if (err)
           console.log("Image write error: " + err);
   });
 }
 
+function deleteImage(img_name) {
+
+  var imgPath = path.join(__dirname, '../public/img/user-photos/')
+
+  fs.unlink(imgPath + img_name + ".jpg", { //.webp for later optimization.. need to crop etc.
+  }, function (err) {
+      if (err)
+          console.log("Image write error: " + err);
+  });
+}
+
+function renamePhoto(oldName, newName) {
+  var imgPath = path.join(__dirname, '../public/img/user-photos/')
+
+  var oldPath = imgPath + oldName + ".jpg"
+  var newPath = imgPath + newName + ".jpg"
+
+  fs.rename(oldPath, newPath);
+  console.log("RENAMED")
+
+
+}
+
 module.exports = {
+  renamePhoto,
+  deleteImage,
   saveImageDataToFileSystemBuffer,
   findZodiacSign,
   getAgeFromDOB,

@@ -16,19 +16,22 @@
  
 
 </style>
-<input type="file" id="profile-image-upload" style="display:none"/> 
+<input type="file" id="profile-image-upload" style="display:none" accept="image/jpeg"/> 
 <div id ="user-profile">
-<div id="profile-image-holder">
+<div id="profile-image-holder" class="captain-profile-img-holder">
     <div id="profile-image-counter">{{#ifeq profile_data.image_count 0}}0{{else}}1{{/ifeq}}/{{profile_data.image_count}}</div>
             {{#ifeq show_action_bar 1}}
         {{else}}
-        <div id="profile-image-edit"><i class="fa-solid fa-pencil"></i></div>
+        <div id="profile-image-add"><i class="fa-solid fa-add"></i></div>
+        <div id="profile-image-delete"><i class="fa-solid fa-trash"></i></div>
         {{/ifeq}}
+        <div id="profile-image-arrow-right"><i class="fa-solid fa-arrow-right"></i></div>
+        <div id="profile-image-arrow-left"><i class="fa-solid fa-arrow-left"></i></div>
+        <div id="profile-username">{{profile_data.username}}</div>
 </div>
 <div id="profile-info-header">
     <div id="profile-location"><i class="fa-solid fa-location-dot"></i> {{profile_data.location}}</div>
     <div id="profile-make-model"></div>
-    <h1 id="profile-username">{{profile_data.username}}</h1>
     <div style="padding:20px">
     <div class="captain-feed-specs">
         <div class="captain-feed-spec ctl">
@@ -92,7 +95,7 @@
     <div id="captain-profile-actions">
         <a style="color:black" href="/messages?uid={{profile_data.user_id}}">
             <div id="captain-profile-message">
-                <i class="fa-solid fa-message"></i>
+                <i class="fa-solid fa-paper-plane"></i>
             </div>
         </a>
         <a style="color:black" href="/feed">
@@ -106,7 +109,7 @@
         </div>-->
     </div>
     {{else}}
-    <a href='/onboarding'><div id="edit-profile-button">Edit Profile</div></a>
+    <a href='/onboarding'><div id="edit-profile-button"><i class="fa-solid fa-pencil"></i> Edit Profile</div></a>
     {{/ifeq}}
 <div id="user">
 

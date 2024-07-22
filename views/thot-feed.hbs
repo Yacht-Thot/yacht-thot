@@ -39,10 +39,15 @@
     padding: 10px;
 }
 .captain-feed-username {
-    font-family: sans-serif;
-    font-size: 3em;
-    text-align: center;
-    /* padding-top: 1em; */
+    font-size: 2em;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+        background: rgba(0, 0, 0, .3);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .captain-feed-link {
@@ -54,6 +59,7 @@
     color: dimgray;
 }
 .captain-feed-make-model {
+    display: none;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -66,13 +72,13 @@
     {{#each captains}}
         <a class='captain-feed-link' href="/profile?uid={{user_id}}">
         <div class="captain-profile">
-            <div class="captain-profile-photo">
-                <div class="profile-image-counter">1/1</div>
+            <div class="captain-profile-photo" {{#ifeq profile_img_idx -1}}{{else}}style="background-image:url(/img/user-photos/{{user_id}}_{{profile_img_idx}}.jpg)"{{/ifeq}}>
+                 <div class="captain-feed-username">{{username}}</div>
             </div>
             <div class="captain-feed-info">
                 <div class="captain-feed-make-model">{{boat_name}}</div>
                 <div class="captain-feed-location"><i class="fa-solid fa-location-dot"></i> {{location}}</div>
-                <div class="captain-feed-username">{{username}}</div>
+                
                 <div class="captain-feed-ne"><i class="fa-solid fa-calendar-days"></i> Next Event: TBD</div>
             </div>
             <div class="captain-feed-specs">
@@ -89,7 +95,7 @@
         <div class="captain-profile-actions">
              <a href="/messages?uid={{user_id}}">
             <div class="captain-profile-message">
-                <i class="fa-solid fa-message"></i>
+                <i class="fa-solid fa-paper-plane"></i>
             </div>
             </a>
             <a href="/profile?uid={{user_id}}">

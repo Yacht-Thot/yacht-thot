@@ -78,19 +78,32 @@ app.listen(process.env.HTTP_PORT, () =>
     console.log(`Listening for HTTP on port ${process.env.HTTP_PORT}!`));
 
 
-app.post('/upload-profile-image/', upload.single("file"), (req, res) => {
+app.post('/upload-profile-image/', upload.single("file"), async (req, res) => {
 
-    (async function () {
-        user_id = await checkauth(req, res);
-        let user_data = await getUserData("email", user_id);
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+    
+            console.log("UPLOAD PICTURE", req.body)
+            if(user_data.image_count == 10) {
+                res.send("too_many_pictures")
+            } else {
+                var photo_name = user_data.user_id + "_" + user_data.image_count
+                Util.saveImageDataToFileSystemBuffer(req.file.buffer, photo_name);
+                if(user_data.image_count == 0) {
+                    User.setProfileImgIdx(user_data, 0)
+                }
+                User.incrementImageCount(user_data.user_id)
+                res.send("1")
+            }
 
-            console.log("ID:", req.body)
-            Util.saveImageDataToFileSystemBuffer(req.file.buffer, "Instructor", req.body.instructorID);
+});
+
+app.post('/delete-profile-image/', upload.single("file"), async (req, res) => {
+
+    var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
+    
+                await User.deleteProfileImg(user_data, req.body.idx)
+                res.send("1")
             
-            res.send("1")
-
-
-    })()
 
 });
 
@@ -209,22 +222,24 @@ app.get('/messages', async (req, res) => {
 
     var message_to_username = ""
     var message_to_uid = ""
+    var message_to_profile_img_idx = -1;
     var message_chain = null;
     var message_previews = -1
 
     if(req.query.uid) {
         var messager_p_data = await User.getProfileData(req.query.uid)
-        console.log(messager_p_data)
+        //console.log(messager_p_data)
         message_to_username = messager_p_data.username
         message_to_uid = messager_p_data.user_id;
+        message_to_profile_img_idx = messager_p_data.profile_img_idx
     
         var message_chain = await User.getMessageChain(user_data.user_id, req.query.uid)
-        console.log("Got message Chainnnn!", message_chain)
+        // console.log("Got message Chainnnn!", message_chain)
     } else {
         var message_previews = await User.getMyMessagePreviews(user_data.user_id)
-        console.log(message_previews)
+       // console.log(message_previews)
         if(message_previews.length == 0) message_previews = -1;
-        console.log("Got message users:", message_previews)
+       // console.log("Got message users:", message_previews)
     }
 
     res.render('messages',
@@ -234,6 +249,7 @@ app.get('/messages', async (req, res) => {
            user_data: user_data,
            message_to_username: message_to_username,
            message_to_id: message_to_uid,
+           message_to_profile_img_idx: message_to_profile_img_idx,
            message_users: message_previews,
            message_chain: message_chain,
            current_version: current_version

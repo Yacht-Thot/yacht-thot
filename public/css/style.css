@@ -53,13 +53,17 @@ body {
     right: 0;
     bottom: 0;
 }
-#thot-profile-img-holder {
-    background: url(/img/no-image-thot.webp);
+.thot-profile-img-holder {
+    background-image: url(/img/no-image-thot.webp);
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 1 !important;
     background-position: center;
     background-size: cover;
     position: relative;
+}
+
+.captain-profile-img-holder {
+    background-image: url(/img/no-image-captain.webp);
 }
 #edit-profile-button {
     background: dodgerblue;
@@ -245,6 +249,20 @@ body {
     font-size: 2em;
     color: black;
 }
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+}
+.modal-footer button {
+    background: dodgerblue;
+    color: white;
+    border: 0;
+    height: 75px;
+    width: 50%;
+}
+
 .thot-profile-goto, .captain-profile-goto {
     position: absolute;
     left: 50%;
@@ -324,12 +342,17 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     display: none;
 }
 
-#user-profile h1 {
-    text-align: center;
-    font-size: 3em;
-    font-weight: normal;
-    margin: 0;
+#profile-username {
     font-family: sans-serif;
+    font-size: 2em;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+        background: rgba(0, 0, 0, .3);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 #profile-image-counter {
@@ -343,7 +366,7 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     font-size: .8em;
     padding: 5px;
     }
-#profile-image-edit {
+#profile-image-add {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -352,6 +375,47 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     color: white;
     border-radius: 10px;
     font-size: .8em;
+    padding: 5px;
+}
+
+#profile-image-delete {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: .8em;
+    padding: 5px;
+}
+
+#profile-image-arrow-right {
+    display: none;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    right: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: lightgray;
+    border-radius: 10px;
+    font-size: 1.5em;
+    padding: 5px;
+}
+
+#profile-image-arrow-left {
+    display: none;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    left: 5px;
+    background: rgba(0, 0, 0, .7);
+    font-family: sans-serif;
+    color: lightgray;
+    border-radius: 10px;
+    font-size: 1.5em;
     padding: 5px;
 }
 
@@ -384,7 +448,6 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 #profile-image-holder {
     aspect-ratio: 16 / 9;
     width: 100%;
-    background-image: url(/img/no-image-captain.webp);
     background-size: cover;
     position: relative;
 }

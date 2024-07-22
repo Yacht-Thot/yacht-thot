@@ -21,8 +21,15 @@
         color: black;
     }
     .thot-feed-username {
-        font-size: 2em;
-        margin-top: 10px;
+    font-size: 2em;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+        background: rgba(0, 0, 0, .3);
+    padding: 5px;
+    border-radius: 10px;
     }
     .thot-feed-item {
         padding: 20px;
@@ -34,7 +41,7 @@
         bottom: 160px;
     }
     .thot-feed-location {
-
+        margin-top: 10px;
     }
     .thot-feed-item {
          position: relative;
@@ -46,13 +53,14 @@
     
     <div class="thot-feed-item">
         <a class='thot-profile-link' href="/profile?uid={{user_id}}">
-        <div class="thot-feed-img">
-            <div class="profile-image-counter">1/1</div>
-        </div>
-        </a>
+        <div class="thot-feed-img" {{#ifeq profile_img_idx -1}}{{else}}style="background-image:url(/img/user-photos/{{user_id}}_{{profile_img_idx}}.jpg)"{{/ifeq}}>
+            <!--<div class="profile-image-counter">1/1</div>-->
         <div class="thot-feed-username">
             {{username}}
         </div>
+        </div>
+        </a>
+
         <div class="thot-feed-location">
             <i class="fa-solid fa-location-dot"></i> {{location}}
         </div>
@@ -66,7 +74,7 @@
         <div class="thot-profile-actions">
             <a href="/messages?uid={{user_id}}">
                 <div class="thot-profile-message">
-                    <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-paper-plane"></i>
                 </div>
             </a>
             <a href="/profile?uid={{user_id}}">

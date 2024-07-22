@@ -143,30 +143,120 @@ function showMessagesInterface() {
 
 }
 
+function sendNewProfilePicture() {
+
+    var formData  = new FormData();
+    var fileField = document.querySelector("#profile-image-upload");
+    
+    formData.append('file', fileField.files[0]);
+
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+           console.log(this.responseText)
+            window.location.href = "/my-profile"
+        }
+    }
+    xhttp.open("POST", "/upload-profile-image", true);
+    xhttp.send(formData);
+}
+
 
 //////////////////////////START///////////////////////////////
 
-if(document.getElementById("profile-image-edit")) {
-    document.getElementById("profile-image-edit").onclick = function() {
+var timestamp = new Date().getTime();
+
+if(document.getElementById("profile-image-counter")) {
+
+    var current_profile_picture = profile_data.profile_img_idx;
+
+var total_profile_pictures = profile_data.image_count;
+
+if(profile_data.image_count > 0 ) {
+    console.log("Setting Profile Pic")
+    document.getElementById("profile-image-holder").style.backgroundImage = "url(/img/user-photos/"+profile_data.user_id+"_"+profile_data.profile_img_idx+".jpg?v="+timestamp+")"
+    
+    if(document.getElementById("profile-image-delete"))
+        document.getElementById("profile-image-delete").style.display = "inherit"
+}
+
+if(profile_data.image_count > 1) {
+    document.getElementById("profile-image-counter").innerHTML = "1/" + total_profile_pictures
+
+    //show right arrow..
+    document.getElementById("profile-image-arrow-right").style.display = "inherit"
+}
+
+document.getElementById("profile-image-arrow-left").onclick = function() {
+    current_profile_picture--;
+    document.getElementById("profile-image-holder").style.backgroundImage = "url(/img/user-photos/"+profile_data.user_id+"_"+current_profile_picture+".jpg?v="+timestamp+")"
+    document.getElementById("profile-image-counter").innerHTML = (current_profile_picture + 1) +"/" + total_profile_pictures
+
+    document.getElementById("profile-image-arrow-right").style.display = "inherit";
+
+    if((current_profile_picture) == 0) {
+        document.getElementById("profile-image-arrow-left").style.display = "none"
+    }
+}
+
+
+document.getElementById("profile-image-arrow-right").onclick = function() {
+    current_profile_picture++;
+    document.getElementById("profile-image-holder").style.backgroundImage = "url(/img/user-photos/"+profile_data.user_id+"_"+current_profile_picture+".jpg?v="+timestamp+")"
+    document.getElementById("profile-image-counter").innerHTML = (current_profile_picture + 1) +"/" + total_profile_pictures
+
+    document.getElementById("profile-image-arrow-left").style.display = "inherit";
+
+    if((current_profile_picture + 1) == total_profile_pictures) {
+        document.getElementById("profile-image-arrow-right").style.display = "none"
+    }
+}
+}
+
+if(document.getElementById("profile-image-delete")) {
+    document.getElementById("profile-image-delete").onclick = function() {
+        var payload = {
+            idx: current_profile_picture
+        }
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log(this.responseText)
+               window.location.href = "/my-profile"
+    
+            }
+        }
+        xhttp.open("POST", "/delete-profile-image", true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify( payload ));
+    }
+
+    document.getElementById("profile-image-add").onclick = function() {
         document.getElementById("profile-image-upload").click();
     }
 
     document.getElementById("profile-image-upload").addEventListener('input', function (evt) {
         console.log(this.value);
-
+       // readFile(this);
+        sendNewProfilePicture()
         //POST /upload-profile-image
     });
 
     
 
     var thotDimensions = {
-        width: 540, height: 720
+        width: 1080, height: 1620
     }
     var captainDimensions = {
-        width: 900, height: 450
+        width: 1920, height: 1820
     }
 
     var currentDimensions = captainDimensions;
+
+    
+
 
     var $uploadCrop, tempFilename, rawImg, imageId;
     $uploadCrop = $('#upload-demo').croppie({
@@ -175,6 +265,33 @@ if(document.getElementById("profile-image-edit")) {
     enableExif: true
 });
 
+$('.item-img').on('change', function () {
+    imageId = $(this).data('id');
+    tempFilename = $(this).val();
+    $('#cancelCropBtn').data('id', imageId); readFile(this);
+});
+
+$('#cropImagePop').on('shown.bs.modal', function () {
+    $uploadCrop.croppie('bind', {
+        url: rawImg
+    }).then(function () {
+        console.log('jQuery bind complete');
+    });
+});
+
+$('#cropImageBtn').on('click', function (ev) {
+    $uploadCrop.croppie('result', {
+        type: 'base64',
+        format: 'webp',
+        size: currentDimensions
+    }).then(function (resp) {
+        
+               console.log("converted:", resp);
+               
+        
+        $('#cropImagePop').modal('hide');
+    });
+});
 
 }
 
@@ -182,9 +299,11 @@ function readFile(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
+            
             $('.upload-demo').addClass('ready');
             $('#cropImagePop').modal('show');
             rawImg = e.target.result;
+            console.log("RAWE:", rawImg)
         }
         reader.readAsDataURL(input.files[0]);
     }

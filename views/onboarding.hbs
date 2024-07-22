@@ -155,6 +155,26 @@ function getAge(DOB) {
         showStep(4)
     }
     document.getElementById("onboarding-captain-next").onclick = function() {
+        if(document.getElementById("captain-username").value == "") {
+            alert("Insert Username")
+            return
+        }
+        if(document.getElementById("captain-location").value == "") {
+            alert("Insert Location")
+            return
+        }
+        if(document.getElementById("captain-boat-name").value == "") {
+            alert("Insert Boat Name")
+            return
+        }
+        if(document.getElementById("captain-tagline").value == "") {
+            alert("Insert Tagline")
+            return
+        }
+        if(document.getElementById("captain-bio").value == "") {
+            alert("Insert Bio")
+            return
+        }
         document.getElementById("captain-prep-boat-name").innerHTML = document.getElementById("captain-boat-name").value
         showStep(3)
     }
