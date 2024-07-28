@@ -67,6 +67,14 @@
     font-family: sans-serif;
 }
 
+.captain-feed-tagline {
+text-align: center;
+    font-style: italic;
+    font-size: 1.2em;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 </style>
 <div id="thot-feed">
     {{#each captains}}
@@ -78,6 +86,7 @@
             <div class="captain-feed-info">
                 <div class="captain-feed-make-model">{{boat_name}}</div>
                 <div class="captain-feed-location"><i class="fa-solid fa-location-dot"></i> {{location}}</div>
+                <div class="captain-feed-tagline">{{tagline}}</div>
                 
                 <div class="captain-feed-ne"><i class="fa-solid fa-calendar-days"></i> Next Event: TBD</div>
             </div>
