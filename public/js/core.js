@@ -93,7 +93,8 @@ function submitOnboarding() {
         location: document.getElementById("thot-location").value,
         birthday: document.getElementById("thot-birthday").value,
         tagline: document.getElementById("thot-tagline").value,
-        bio: document.getElementById("thot-bio").value
+        bio: document.getElementById("thot-bio").value,
+        eye_color: document.getElementById("").value
     }
     if(role == "CAPTAIN") {
         payload = {
@@ -169,7 +170,7 @@ var timestamp = new Date().getTime();
 
 if(document.getElementById("profile-image-counter")) {
 
-    var current_profile_picture = profile_data.profile_img_idx;
+var current_profile_picture = profile_data.profile_img_idx;
 
 var total_profile_pictures = profile_data.image_count;
 

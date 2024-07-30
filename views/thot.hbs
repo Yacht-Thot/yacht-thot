@@ -25,6 +25,7 @@
         margin-top: 5px;
         margin-bottom: 5px;
         font-style: italic;
+        font-weight: 700;
     }
     #thot-profile-info {
         padding: 10px;
@@ -42,12 +43,12 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     }
     #thot-profile-message {
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(calc(-50% + 2em), -50%);
+        right: 5px;
+        bottom: 5px;
         border: 1px solid gray;
+        background: white;
         border-radius: 50%;
-        padding: 20px;
+        padding: 10px;
         font-size: 2em;
     }
         #thot-profile-back {
@@ -71,6 +72,12 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         padding: 20px;
         font-size: 2em;
     }
+    #thot-location {
+        float: right;
+    }
+    #thot-bio {
+        margin-bottom: 10px;
+    }
 </style>
 <input type="file" id="profile-image-upload" style="display:none" accept="image/*"/> 
 <div id="thot-profile-holder">
@@ -84,29 +91,39 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         <div id="profile-image-arrow-right"><i class="fa-solid fa-arrow-right"></i></div>
         <div id="profile-image-arrow-left"><i class="fa-solid fa-arrow-left"></i></div>
         <div id="thot-username">{{profile_data.username}}</div>
+        {{#ifeq show_action_bar 1}}
+        <div id="thot-profile-message">
+            <i class="fa-solid fa-message"></i>
+        </div>
+        {{/ifeq}}
     </div>
     <div id="thot-profile-info">
-        
+        <div id="thot-age">{{profile_data.age}}</div>
         <div id="thot-location"><i class="fa-solid fa-location-dot"></i> {{profile_data.location}}</div>
-        <div id="thot-sign">{{profile_data.a_sign}}</div>
+        
         <div id="thot-tagline">{{profile_data.tagline}}</div>
-                <div id="thot-age">{{profile_data.age}}</div>
         
         <div id="thot-bio">{{profile_data.bio}}</div>
+        <div id="thot-sign" class="profile-about-bubble">{{profile_data.a_sign}}</div>
+
+        <div id="thot-eye-color" class="profile-about-bubble"><i class="fa-solid fa-eye"></i> Blue</div>
+        <div id="thot-hair-color" class="profile-about-bubble"><i class="fa-solid fa-ruler"></i> Brown</div>
+        <div id="thot-height" class="profile-about-bubble"><i class="fa-solid fa-up-down"></i> 6/2</div>
+        <div id="thot-drinks" class="profile-about-bubble"><i class="fa-solid fa-martini-glass"></i> No</div>
+        <div id="thot-pet" class="profile-about-bubble"><i class="fa-solid fa-dog"></i> Lizard</div>
+        <div id="thot-food" class="profile-about-bubble"><i class="fa-solid fa-burger"></i> Pizza</div>
     </div>
     {{#ifeq show_action_bar 1}}
-    <div id="thot-profile-actions">
+    <!--<div id="thot-profile-actions">
         <a style="color:black" href="/messages?uid={{profile_data.user_id}}">
-        <div id="thot-profile-message">
-            <i class="fa-solid fa-paper-plane"></i>
-        </div>
+        
         </a>
         <a href="/feed">
             <div id="thot-profile-back">
                 <i class="fa-solid fa-arrow-left-long"></i>
             </div>
         </a>
-        <!--
+        
         <div id="thot-profile-like" onclick="likeProfile({{profile_data.user_id}})">
             <i id="thot-profile-like-icon" class="fa-regular fa-heart"></i>
         </div>-->

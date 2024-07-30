@@ -1,6 +1,6 @@
 {{> header }}
 <style>
-    #step2-CAPTAIN, #step2-THOT, #step3-CAPTAIN, #step4-CAPTAIN {
+    #step2-CAPTAIN, #step2-THOT, #step3-CAPTAIN, #step4-CAPTAIN, #step3-THOT {
         opacity: 0;
         transition: opacity 1s;
         display: none
@@ -49,7 +49,7 @@
                 <h2>Enter Boat</h2>
                 <input id="captain-boat-name" placeholder="Make/Model"/ value="{{user_data.boat_name}}">
                 <h2>Enter a Tagline</h2>
-                <textarea id="captain-tagline" maxlength="50">{{user_data.tagline}}</textarea>
+                <textarea id="captain-tagline" maxlength="35">{{user_data.tagline}}</textarea>
                 <h2>Enter a Bio</h2>
                 <textarea id="captain-bio" maxlength="500">{{user_data.bio}}</textarea>
                 <div id="onboarding-captain-back" class="onboarding-button">Back</div><div id="onboarding-captain-next" class="onboarding-button">Next</div>
@@ -97,11 +97,28 @@
                 <h2>Enter Birthday</h2>
                 <input id="thot-birthday" onchange="checkBirthday()" type="date" value="{{user_data.birthday_formatted}}"/>
                 <h2>Enter a Tagline</h2>
-                <textarea id="thot-tagline" maxlength="20">{{user_data.tagline}}</textarea>
+                <textarea id="thot-tagline" maxlength="35">{{user_data.tagline}}</textarea>
                 <h2>Enter a Bio</h2>
-                <textarea id="thot-bio">{{user_data.bio}}</textarea>
-                <div id="onboarding-back-thot" class="onboarding-button">Back</div><div id="onboarding-submit-thot" class="onboarding-button">Submit</div>
+                <textarea id="thot-bio" maxlength="500">{{user_data.bio}}</textarea>
+                <div id="onboarding-back-thot" class="onboarding-button">Back</div><div id="onboarding-step-3-thot" class="onboarding-button">Next</div>
             </div>
+            <div id="step3-THOT">
+                <h2>Eye Color</h2>
+                <input id='thot-eye-color' placeholder="baby blue (optional)" />
+                <h2>Hair Color</h2>
+                <input id='thot-hair-color' placeholder="blonde baddie (optional)" />
+                <h2>How Tall Are You?</h2>
+                <input id='thot-height' placeholder="5'5 (optional)" />
+                <h2>Do You Drink?</h2>
+                <input id='thot-drinks' placeholder="yes/no (optional)" />
+                <h2>What Kind of Pet Do You Have?</h2>
+                <input id='thot-pet' placeholder="dog mom (optional)" />
+                <h2>What's Your Favorite Food?</h2>
+                <input id='thot-favorite-food' placeholder="sushi (optional)" />
+                <div id="onboarding-back-thot" class="onboarding-button">Back</div><div id="onboarding-submit-thot" class="onboarding-button">Submit</div>
+           
+            </div>
+            <div id="step4-THOT"></div>
         </div>
 
 </div>
@@ -150,6 +167,7 @@ function getAge(DOB) {
             document.getElementById("thot-birthday").value = ""
         }
     }
+
 
     document.getElementById("onboarding-captain-next-2").onclick = function() {
         showStep(4)
@@ -204,6 +222,11 @@ function getAge(DOB) {
     document.getElementById("onboarding-captain-back-3").onclick = function() {
         showStep(3)
     }
+
+        document.getElementById("onboarding-step-3-thot").onclick = function() {
+        showStep(3)
+    }
+
     function showStep(step) {
         console.log("Showing Step " + step + " FOR " + role)
     switch(step) {
