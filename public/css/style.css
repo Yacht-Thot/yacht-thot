@@ -254,13 +254,14 @@ body {
 }
 .thot-profile-message, .captain-profile-message {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(calc(-50% + 2em), -50%);
+    right: 5px;
+    bottom: 5px;
     border: 1px solid gray;
+    background: white;
     border-radius: 50%;
-    padding: 20px;
+    padding: 10px;
     font-size: 2em;
+    pointer-events: all;
     color: black;
 }
 .modal-footer {
@@ -311,13 +312,14 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 #captain-profile-message {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(calc(-50% + 2em), -50%);
+    right: 5px;
+    bottom: 5px;
     border: 1px solid gray;
+    background: white;
     border-radius: 50%;
-    padding: 20px;
+    padding: 10px;
     font-size: 2em;
+    z-index: 2;
 }
     #captain-profile-back {
     position: absolute;
@@ -361,8 +363,7 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     font-size: 2em;
     position: absolute;
     bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 35px;
     color: white;
         background: rgba(0, 0, 0, .3);
     padding: 5px;

@@ -86,6 +86,11 @@ if(document.getElementById("onboarding-submit-thot")) {
     }
 }
 
+function gotoMessages(user_id) {
+    window.location.href = "/messages?uid=" + user_id
+}
+window.gotoMessages = gotoMessages;
+
 function submitOnboarding() {
     var payload = {
         role: role,
@@ -314,7 +319,10 @@ function readFile(input) {
 }
 
 if(window.location.href.includes("profile")) {
-    document.getElementById("profile-ab-icon").style.color = "dodgerblue"
+
+    //if(show_action_bar != "1")
+     //   document.getElementById("profile-ab-icon").style.color = "dodgerblue"
+
     if(profile_data.role == "CAPTAIN") {
         for (var key in profile_data.amenities) {
             if (profile_data.amenities.hasOwnProperty(key)) {

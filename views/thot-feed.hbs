@@ -42,8 +42,7 @@
     font-size: 2em;
     position: absolute;
     bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 10px;
     color: white;
     background: rgba(0, 0, 0, .3);
     padding: 5px;
@@ -82,6 +81,11 @@ text-align: center;
         <div class="captain-profile">
             <div class="captain-profile-photo" {{#ifeq profile_img_idx -1}}{{else}}style="background-image:url(/img/user-photos/{{user_id}}_{{profile_img_idx}}.jpg)"{{/ifeq}}>
                  <div class="captain-feed-username">{{username}}</div>
+                
+            <div class="captain-profile-message" onclick="gotoMessages({{user_id}})">
+                <i class="fa-solid fa-message"></i>
+            </div>
+            
             </div>
             <div class="captain-feed-info">
                 <div class="captain-feed-make-model">{{boat_name}}</div>
@@ -101,7 +105,7 @@ text-align: center;
             <i class="fa-solid fa-calendar"></i> Year: {{boat_year}}
         </div>
             </div>
-        <div class="captain-profile-actions">
+        <!--<div class="captain-profile-actions">
              <a href="/messages?uid={{user_id}}">
             <div class="captain-profile-message">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -115,8 +119,8 @@ text-align: center;
             <!--
             <div class="captain-profile-like" onclick="likeProfile({{user_id}})">
                 <i class="fa-regular fa-heart"></i>
-            </div>--->
-        </div>
+            </div>
+        </div>-->
         </div>
         </a>
     {{/each}}

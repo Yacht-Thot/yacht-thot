@@ -24,8 +24,7 @@
     font-size: 2em;
     position: absolute;
     bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 10px;
     color: white;
         background: rgba(0, 0, 0, .3);
     padding: 5px;
@@ -58,6 +57,10 @@
         <div class="thot-feed-username">
             {{username}}
         </div>
+          <!--<a href="/messages?uid={{user_id}}">-->
+                <div class="thot-profile-message" onclick="gotoMessages({{user_id}})">
+                    <i class="fa-solid fa-message"></i>
+                </div>
         </div>
         </a>
 
@@ -71,7 +74,7 @@
             {{age}}
         </div>
 
-        <div class="thot-profile-actions">
+        <!--<div class="thot-profile-actions">
             <a href="/messages?uid={{user_id}}">
                 <div class="thot-profile-message">
                     <i class="fa-solid fa-paper-plane"></i>
@@ -81,7 +84,7 @@
                 <div class="thot-profile-goto">
                     <i class="fa-solid fa-user"></i>
                 </div>
-            </a>
+            </a> --->
             <!--
             <div class="thot-profile-like" onclick="likeProfile({{user_id}})">
                 <i class="fa-regular fa-heart"></i>

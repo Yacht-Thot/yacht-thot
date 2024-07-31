@@ -10,8 +10,7 @@
     font-size: 2em;
     position: absolute;
     bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 35px;
     color: white;
         background: rgba(0, 0, 0, .3);
     padding: 5px;
@@ -38,8 +37,8 @@
         width: 100%;
         position: fixed;
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     }
     #thot-profile-message {
         position: absolute;
@@ -50,6 +49,7 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         border-radius: 50%;
         padding: 10px;
         font-size: 2em;
+        z-index: 2;
     }
         #thot-profile-back {
         position: absolute;
@@ -92,9 +92,11 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         <div id="profile-image-arrow-left"><i class="fa-solid fa-arrow-left"></i></div>
         <div id="thot-username">{{profile_data.username}}</div>
         {{#ifeq show_action_bar 1}}
+        <a style="color:black" href="/messages?uid={{profile_data.user_id}}">
         <div id="thot-profile-message">
             <i class="fa-solid fa-message"></i>
         </div>
+        </a>
         {{/ifeq}}
     </div>
     <div id="thot-profile-info">
@@ -137,5 +139,7 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
             profile_data = profile_data.replace(/&quot;/g, '\"');
             console.log("PROFILE DATA:", profile_data)
             profile_data = JSON.parse(profile_data);
+
+            var show_action_bar = "{{show_action_bar}}"
 </script>
 {{> footer }}
