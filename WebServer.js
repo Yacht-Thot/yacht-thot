@@ -388,6 +388,8 @@ app.get('/onboarding', async (req, res) => {
     var user_data = await User.getUserData(req.cookies['uid'], req.cookies['auth_key']);
 
     var bd_formatted = user_data.birthday;
+    if(bd_formatted == null)
+        bd_formatted = ""
 
     bd_formatted = bd_formatted.split(" ")[0]
 
